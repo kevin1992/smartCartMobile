@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "191023148223",
+    "firebase_url": "https://market-4ae75.firebaseio.com",
+    "project_id": "market-4ae75",
+    "storage_bucket": "market-4ae75.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:191023148223:android:6e189a5b49b5c179",
+        "android_client_info": {
+          "package_name": "com.dogmasolutions.smartcart"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "191023148223-dvg8renbpn5lct0nrrl9p93qu6hoe07u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDHzsarXFKDjXeLzXh435m4qZdRZUzN4TM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
