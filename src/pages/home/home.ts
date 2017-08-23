@@ -9,7 +9,17 @@ import { AlertController } from 'ionic-angular';
 })
 export class HomePage {
 
+  public productos=[
+    {nombre:'Pelota'},
+    {nombre:'Pelota'},
+    {nombre:'Pelota'},
+    {nombre:'Pelota'},
+    {nombre:'Pelota'}
+  ]
+
   constructor(public navCtrl: NavController,private qrScanner: QRScanner,private alertCtrl: AlertController) {
+
+
 
   }
 

@@ -37,7 +37,6 @@
         "ionic-angular": "3.6.0",
         "ionic-plugin-keyboard": "^2.2.1",
         "ionicons": "3.0.0",
-        "phonegap-plugin-barcodescanner": "file:node_modules/phonegap-plugin-barcodescanner",
         "phonegap-plugin-push": "^2.0.0",
         "rxjs": "5.4.0",
         "sw-toolbox": "3.6.0",

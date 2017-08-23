@@ -9,6 +9,7 @@ import {HomePage} from '../pages/home/home';
 
 import {CloudSettings, CloudModule} from '@ionic/cloud-angular';
 import {QRScanner} from "@ionic-native/qr-scanner";
+import {GruposPage} from "../pages/grupos/grupos";
 
 const cloudSettings: CloudSettings = {
   'core': {
@@ -32,6 +33,7 @@ const cloudSettings: CloudSettings = {
 @NgModule({
   declarations: [
     MyApp,
+    GruposPage,
     HomePage
   ],
   imports: [
@@ -42,6 +44,7 @@ const cloudSettings: CloudSettings = {
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
+    GruposPage,
     HomePage
   ],
   providers: [

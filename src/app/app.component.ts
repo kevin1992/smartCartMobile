@@ -7,13 +7,14 @@ import {
   Push,
   PushToken
 } from '@ionic/cloud-angular';
+import {GruposPage} from "../pages/grupos/grupos";
 
 @Component({
   templateUrl: 'app.html'
 })
 
 export class MyApp {
-  rootPage:any = HomePage;
+  rootPage:any = GruposPage;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,private push: Push) {
     platform.ready().then(() => {
