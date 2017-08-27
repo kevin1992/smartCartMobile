@@ -6,6 +6,7 @@ import {StatusBar} from '@ionic-native/status-bar';
 
 import {MyApp} from './app.component';
 import {HomePage} from '../pages/home/home';
+import {LoginPage} from '../pages/login/login';
 
 import {CloudSettings, CloudModule} from '@ionic/cloud-angular';
 import {QRScanner} from "@ionic-native/qr-scanner";
@@ -34,7 +35,8 @@ const cloudSettings: CloudSettings = {
   declarations: [
     MyApp,
     GruposPage,
-    HomePage
+    HomePage,
+    LoginPage
   ],
   imports: [
     BrowserModule,
@@ -45,7 +47,8 @@ const cloudSettings: CloudSettings = {
   entryComponents: [
     MyApp,
     GruposPage,
-    HomePage
+    HomePage,
+    LoginPage
   ],
   providers: [
     StatusBar,

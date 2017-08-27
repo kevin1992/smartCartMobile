@@ -3,20 +3,22 @@ import { Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { HomePage } from '../pages/home/home';
+import { LoginPage } from '../pages/login/login';
+import {GruposPage} from "../pages/grupos/grupos";
 import {
   Push,
   PushToken
 } from '@ionic/cloud-angular';
-import {GruposPage} from "../pages/grupos/grupos";
 
 @Component({
   templateUrl: 'app.html'
 })
 
 export class MyApp {
-  rootPage:any = GruposPage;
+  public rootPage: any;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,private push: Push) {
+    this.rootPage= LoginPage; // Aca agrego la pagina principal
     platform.ready().then(() => {
 
       if(platform.is('android')){
