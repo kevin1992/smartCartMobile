@@ -13,12 +13,12 @@
 
 </ion-header>
 -->
-
+<!--
 <ion-content padding>
+
   <img src="/assets/icon/logo_smartcart_completo.png">
 
   <ion-list>
-
     <ion-item>
       <ion-label stacked>Usuario</ion-label>
       <ion-input type="text"></ion-input>
@@ -28,17 +28,47 @@
       <ion-label stacked>Contraseña</ion-label>
       <ion-input type="password"></ion-input>
     </ion-item>
-
   </ion-list>
 
   <div padding>
-    <button ion-button color="primary" block>LOGIN</button>
+    <button ion-button color="naranja" block>LOGIN</button>
   </div>
 
   <div padding>
-    <button icon-left ion-button color="facebook" block><ion-icon name="logo-facebook" md="logo-facebook"></ion-icon>Login con Facebook</button>
-
+    <button icon-left ion-button color="facebook" block><ion-icon name="logo-facebook"></ion-icon>Login con Facebook</button>
     <button icon-left ion-button color="danger" block><ion-icon name="logo-googleplus"></ion-icon>Login con Google+</button>
   </div>
 
+
 </ion-content>
+-->
+<ion-content class="background">
+  <ion-card>
+    <ion-card-header>
+      Iniciar sesión en SMARTCART
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list no-line>
+        <ion-item>
+          <ion-input type="text" placeholder="Usuario"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input type="password" placeholder="Contraseña"></ion-input>
+        </ion-item>
+        <button ion-button block outline color="light">Login</button>
+        <p>Ó</p>
+        <button ion-button block color="facebook">
+          <ion-icon name="logo-facebook"></ion-icon> Login con facebook
+        </button>
+        <button ion-button block color="googleplus">
+          <ion-icon name="logo-googleplus"></ion-icon> Login con google+
+        </button>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+  <button class="bottom" ion-button clear full color="light">¿No tienes una cuenta? Regístrate</button>
+</ion-content>
+
+
+
+
