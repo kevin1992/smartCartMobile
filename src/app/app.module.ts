@@ -11,6 +11,8 @@ import {LoginPage} from '../pages/login/login';
 import {CloudSettings, CloudModule} from '@ionic/cloud-angular';
 import {QRScanner} from "@ionic-native/qr-scanner";
 import {GruposPage} from "../pages/grupos/grupos";
+import {ComprasPage} from "../pages/compras/compras";
+import {HistorialComprasPage} from "../pages/historial-compras/historial-compras";
 
 const cloudSettings: CloudSettings = {
   'core': {
@@ -36,6 +38,8 @@ const cloudSettings: CloudSettings = {
     MyApp,
     GruposPage,
     HomePage,
+    ComprasPage,
+    HistorialComprasPage,
     LoginPage
   ],
   imports: [
@@ -48,6 +52,8 @@ const cloudSettings: CloudSettings = {
     MyApp,
     GruposPage,
     HomePage,
+    ComprasPage,
+    HistorialComprasPage,
     LoginPage
   ],
   providers: [

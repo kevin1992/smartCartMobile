@@ -1,1 +1,19 @@
-<ion-nav [root]="rootPage"></ion-nav>
+
+<ion-menu [content]="mycontent">
+  <ion-content>
+    <ion-list>
+      <button ion-item menuClose (click)="openPage(home)">
+        Home
+      </button>
+      <button ion-item menuClose (click)="openPage(compra)">
+        Compra
+      </button>
+      <button ion-item menuClose (click)="openPage(hCompras)">
+        Historial de Compras
+      </button>
+    </ion-list>
+  </ion-content>
+
+</ion-menu>
+
+<ion-nav #mycontent [root]="rootPage"></ion-nav>

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Platform } from 'ionic-angular';
+import {Platform, NavController} from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { HomePage } from '../pages/home/home';
@@ -9,6 +9,8 @@ import {
   Push,
   PushToken
 } from '@ionic/cloud-angular';
+import {ComprasPage} from "../pages/compras/compras";
+import {HistorialComprasPage} from "../pages/historial-compras/historial-compras";
 
 @Component({
   templateUrl: 'app.html'
@@ -16,6 +18,9 @@ import {
 
 export class MyApp {
   public rootPage: any;
+  public home = LoginPage;
+  public compra = ComprasPage;
+  public hCompras = HistorialComprasPage;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,private push: Push) {
     this.rootPage= LoginPage; // Aca agrego la pagina principal
@@ -42,6 +47,10 @@ export class MyApp {
       splashScreen.hide();
     });
 
+  }
+
+  openPage(page){
+    this.rootPage = page;
   }
 }
 
