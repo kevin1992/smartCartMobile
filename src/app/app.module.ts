@@ -7,10 +7,10 @@ import {StatusBar} from '@ionic-native/status-bar';
 import {MyApp} from './app.component';
 import {HomePage} from '../pages/home/home';
 import {LoginPage} from '../pages/login/login';
+import { ModificarGruposPage} from "../pages/grupos/grupos";
 
 import {CloudSettings, CloudModule} from '@ionic/cloud-angular';
 import {QRScanner} from "@ionic-native/qr-scanner";
-import {GruposPage} from "../pages/grupos/grupos";
 import {ComprasPage} from "../pages/compras/compras";
 import {HistorialComprasPage} from "../pages/historial-compras/historial-compras";
 
@@ -36,11 +36,11 @@ const cloudSettings: CloudSettings = {
 @NgModule({
   declarations: [
     MyApp,
-    GruposPage,
     HomePage,
     ComprasPage,
     HistorialComprasPage,
-    LoginPage
+    LoginPage,
+    ModificarGruposPage
   ],
   imports: [
     BrowserModule,
@@ -50,11 +50,11 @@ const cloudSettings: CloudSettings = {
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    GruposPage,
     HomePage,
     ComprasPage,
     HistorialComprasPage,
-    LoginPage
+    LoginPage,
+    ModificarGruposPage
   ],
   providers: [
     StatusBar,

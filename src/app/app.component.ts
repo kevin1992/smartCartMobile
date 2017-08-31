@@ -4,7 +4,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
-import {GruposPage} from "../pages/grupos/grupos";
+import { ModificarGruposPage } from "../pages/grupos/grupos";
 import {
   Push,
   PushToken
@@ -21,6 +21,7 @@ export class MyApp {
   public home = LoginPage;
   public compra = ComprasPage;
   public hCompras = HistorialComprasPage;
+  public mGrupos = ModificarGruposPage;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,private push: Push) {
     this.rootPage= LoginPage; // Aca agrego la pagina principal

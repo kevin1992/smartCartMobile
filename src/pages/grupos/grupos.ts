@@ -13,17 +13,15 @@ import {HomePage} from "../home/home";
   selector: 'page-grupos',
   templateUrl: 'grupos.html',
 })
-export class GruposPage {
+export class ModificarGruposPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
 
-
-
   }
 
-  irAHome(){
-    this.navCtrl.push(HomePage);
-  }
+//  irAHome(){
+//    this.navCtrl.push(HomePage);
+//  }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad GruposPage');
