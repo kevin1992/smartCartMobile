@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {HomePage} from "../home/home";
+import {DetalleGrupoPage} from "../detalle-grupo/detalle-grupo";
 
 /**
  * Generated class for the GruposPage page.
@@ -13,7 +14,14 @@ import {HomePage} from "../home/home";
   selector: 'page-grupos',
   templateUrl: 'grupos.html',
 })
-export class ModificarGruposPage {
+export class GruposPage {
+
+  grupos = [
+    {name:'Familia'},
+    {name:'Amigos'},
+    {name:'Abuelos'},
+    {name:'Novia'}
+  ]
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
 
@@ -25,6 +33,10 @@ export class ModificarGruposPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad GruposPage');
+  }
+
+  itemSelected(grupo){
+    this.navCtrl.push(DetalleGrupoPage);
   }
 
 }

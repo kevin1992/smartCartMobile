@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {IonicPage, NavController, NavParams, ActionSheetController} from 'ionic-angular';
+import {ComprasPage} from "../compras/compras";
 
 /**
  * Generated class for the HistorialComprasPage page.
@@ -46,4 +47,7 @@ export class HistorialComprasPage {
     console.log('ionViewDidLoad HistorialComprasPage');
   }
 
+  verCompra(){
+    this.navCtrl.push(ComprasPage);
+  }
 }
