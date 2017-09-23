@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AlertController } from 'ionic-angular';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {HomePage} from "../home/home";
 import {DetalleGrupoPage} from "../detalle-grupo/detalle-grupo";
@@ -14,6 +15,8 @@ import {DetalleGrupoPage} from "../detalle-grupo/detalle-grupo";
   selector: 'page-grupos',
   templateUrl: 'grupos.html',
 })
+
+
 export class GruposPage {
 
   grupos = [
@@ -23,9 +26,9 @@ export class GruposPage {
     {name:'Novia'}
   ]
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-
+  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController) {
   }
+
 
 //  irAHome(){
 //    this.navCtrl.push(HomePage);
@@ -37,6 +40,35 @@ export class GruposPage {
 
   itemSelected(grupo){
     this.navCtrl.push(DetalleGrupoPage);
+  }
+
+  doPrompt() {
+    let prompt = this.alertCtrl.create({
+      title: 'Nuevo Grupo',
+      message: "Ingrese el nombre del nuevo grupo",
+      inputs: [
+        {
+          name: 'Nombre de grupo',
+          placeholder: 'Nombre de grupo'
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancelar',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Crear',
+          handler: data => {
+            this.navCtrl.push(DetalleGrupoPage);
+            console.log('Saved clicked');
+          }
+        }
+      ]
+    });
+    prompt.present();
   }
 
 }
