@@ -16,6 +16,7 @@ import {DetalleListaPage} from "../detalle-lista/detalle-lista";
 })
 export class DetalleGrupoPage {
 
+  nombreDelGrupo:string;
   members=[
     {name:'Juan'},
     {name:'Azul'},
@@ -24,6 +25,9 @@ export class DetalleGrupoPage {
   ]
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public actionSheetCtrl:ActionSheetController) {
+    console.log(this.navParams.get('nombre'));
+    this.nombreDelGrupo = this.navParams.get('nombre');
+
   }
 
   ionViewDidLoad() {

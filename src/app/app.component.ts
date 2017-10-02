@@ -11,6 +11,7 @@ import {
 } from '@ionic/cloud-angular';
 import {ComprasPage} from "../pages/compras/compras";
 import {HistorialComprasPage} from "../pages/historial-compras/historial-compras";
+import {AsociarCompraPage} from "../pages/asociar-compra/asociar-compra";
 
 @Component({
   templateUrl: 'app.html'
@@ -22,6 +23,7 @@ export class MyApp {
   public compra = ComprasPage;
   public hCompras = HistorialComprasPage;
   public mGrupos = GruposPage;
+  public asociarCompra = AsociarCompraPage;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,private push: Push) {
     this.rootPage= LoginPage; // Aca agrego la pagina principal

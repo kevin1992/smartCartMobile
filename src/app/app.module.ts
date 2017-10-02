@@ -10,7 +10,6 @@ import {LoginPage} from '../pages/login/login';
 import {GruposPage} from "../pages/grupos/grupos";
 
 import {CloudSettings, CloudModule} from '@ionic/cloud-angular';
-import {QRScanner} from "@ionic-native/qr-scanner";
 import {ComprasPage} from "../pages/compras/compras";
 import {HistorialComprasPage} from "../pages/historial-compras/historial-compras";
 import {HomeTabsPage} from "../pages/home-tabs/home-tabs";
@@ -21,6 +20,8 @@ import {DetalleListaPage} from "../pages/detalle-lista/detalle-lista";
 import {DetalleProductoPage} from "../pages/detalle-producto/detalle-producto";
 import {ListasGrupoPage} from "../pages/listas-grupo/listas-grupo";
 import {MisComprasPage} from "../pages/mis-compras/mis-compras";
+import {BarcodeScanner} from "@ionic-native/barcode-scanner";
+import {AsociarCompraPage} from "../pages/asociar-compra/asociar-compra";
 
 const cloudSettings: CloudSettings = {
   'core': {
@@ -53,6 +54,7 @@ const cloudSettings: CloudSettings = {
     ConfiguracionPage,
     DetalleCompraPage,
     DetalleGrupoPage,
+    AsociarCompraPage,
     DetalleListaPage,
     DetalleProductoPage,
     ListasGrupoPage,
@@ -69,6 +71,7 @@ const cloudSettings: CloudSettings = {
     HomePage,
     ComprasPage,
     HomeTabsPage,
+    AsociarCompraPage,
     HistorialComprasPage,
     LoginPage,
     GruposPage,
@@ -82,8 +85,9 @@ const cloudSettings: CloudSettings = {
   ],
   providers: [
     StatusBar,
-    QRScanner,
+    BarcodeScanner,
     SplashScreen,
+
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

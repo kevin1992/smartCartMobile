@@ -39,7 +39,7 @@ export class GruposPage {
   }
 
   itemSelected(grupo){
-    this.navCtrl.push(DetalleGrupoPage);
+    this.navCtrl.push(DetalleGrupoPage,{nombre:grupo.name});
   }
 
   doPrompt() {
@@ -48,7 +48,7 @@ export class GruposPage {
       message: "Ingrese el nombre del nuevo grupo",
       inputs: [
         {
-          name: 'Nombre de grupo',
+          name: 'name',
           placeholder: 'Nombre de grupo'
         },
       ],
@@ -62,7 +62,7 @@ export class GruposPage {
         {
           text: 'Crear',
           handler: data => {
-            this.navCtrl.push(DetalleGrupoPage);
+            this.navCtrl.push(DetalleGrupoPage,{nombre:data.name});
             console.log('Saved clicked');
           }
         }
