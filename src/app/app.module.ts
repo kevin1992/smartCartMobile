@@ -22,6 +22,9 @@ import {ListasGrupoPage} from "../pages/listas-grupo/listas-grupo";
 import {MisComprasPage} from "../pages/mis-compras/mis-compras";
 import {BarcodeScanner} from "@ionic-native/barcode-scanner";
 import {AsociarCompraPage} from "../pages/asociar-compra/asociar-compra";
+import {IonicStorageModule} from "@ionic/storage";
+import {ApiService} from "../services/api.service";
+import {HttpModule} from "@angular/http";
 
 const cloudSettings: CloudSettings = {
   'core': {
@@ -63,7 +66,8 @@ const cloudSettings: CloudSettings = {
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    CloudModule.forRoot(cloudSettings)
+    CloudModule.forRoot(cloudSettings),
+    IonicStorageModule.forRoot(),HttpModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -87,6 +91,7 @@ const cloudSettings: CloudSettings = {
     StatusBar,
     BarcodeScanner,
     SplashScreen,
+    ApiService,
 
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]

@@ -29,6 +29,7 @@ export class MyApp {
     this.rootPage= LoginPage; // Aca agrego la pagina principal
     platform.ready().then(() => {
 
+
       if(platform.is('android')){
         this.push.register().then((t: PushToken) => {
           return this.push.saveToken(t);
@@ -55,5 +56,15 @@ export class MyApp {
   openPage(page){
     this.rootPage = page;
   }
+
+  cerrarSesion(){
+    window.localStorage.removeItem('smartCart-auth');
+    this.openPage(LoginPage);
+  }
 }
 
+
+
+export const API = {
+  URL:'http://localhost:8080/smartcart/public/index.php/api/'
+};

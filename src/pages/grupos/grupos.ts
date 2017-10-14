@@ -3,6 +3,8 @@ import { AlertController } from 'ionic-angular';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {HomePage} from "../home/home";
 import {DetalleGrupoPage} from "../detalle-grupo/detalle-grupo";
+import {ApiService} from "../../services/api.service";
+import {API} from "../../app/app.component";
 
 /**
  * Generated class for the GruposPage page.
@@ -19,14 +21,10 @@ import {DetalleGrupoPage} from "../detalle-grupo/detalle-grupo";
 
 export class GruposPage {
 
-  grupos = [
-    {name:'Familia'},
-    {name:'Amigos'},
-    {name:'Abuelos'},
-    {name:'Novia'}
-  ]
+  grupos = [];
+  loading = false;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController,public apiService:ApiService) {
   }
 
 
@@ -36,10 +34,21 @@ export class GruposPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad GruposPage');
+    this.loading = true;
+    this.apiService.get(API.URL+"/groups",{},{mock:[
+      {id:1,name:'Familia'},
+      {id:2,name:'Amigos'},
+      {id:3,name:'Abuelos'},
+      {id:4,name:'Novia'}
+    ]}).subscribe((grupos)=>{
+      this.grupos = grupos;
+      this.loading = false;
+    });
+
   }
 
   itemSelected(grupo){
-    this.navCtrl.push(DetalleGrupoPage,{nombre:grupo.name});
+    this.navCtrl.push(DetalleGrupoPage,{nombre:grupo.name,id:grupo.id});
   }
 
   doPrompt() {
