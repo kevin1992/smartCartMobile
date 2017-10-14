@@ -11,56 +11,89 @@
 </ion-header>
 
 <ion-content class="background">
-  <ion-card>
-    <ion-card-header *ngIf="option=='login'">
-      Iniciar sesión en SMARTCART
-    </ion-card-header>
-    <ion-card-header *ngIf="option=='register'">
-      Registrate en SMARTCART
-    </ion-card-header>
-    <ion-card-content>
-      <ion-list *ngIf="option=='login'" no-line>
-        <ion-item>
-          <ion-input type="text" [(ngModel)]="data.user" placeholder="Usuario"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-input type="password" [(ngModel)]="data.password" placeholder="Contraseña"></ion-input>
-        </ion-item>
-        <button ion-button [disabled]="!data || !data.user || !data.password || data.user.length==0 || data.password.length==0" (click)="login()" block outline color="light">Login</button>
-        <p>Ó</p>
-        <button ion-button block color="facebook">
-          <ion-icon name="logo-facebook"></ion-icon>
-          Login con facebook
-        </button>
-        <button ion-button block color="googleplus">
-          <ion-icon name="logo-googleplus"></ion-icon>
-          Login con google+
-        </button>
-      </ion-list>
-      <ion-list *ngIf="option=='register'" no-line>
-        <ion-item>
-          <ion-input type="text" [(ngModel)]="data.name" placeholder="Nombre"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-input type="text" [(ngModel)]="data.last_name" placeholder="Apellido"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-input type="email" [(ngModel)]="data.email" placeholder="Email"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-input type="password" [(ngModel)]="data.password" placeholder="Contraseña"></ion-input>
-        </ion-item>
-        <button ion-button [disabled]="!data || !data.email || !data.name || !data.last_name || !data.password ||data.name.length==0 ||data.email.length==0 ||data.last_name.length==0 ||data.password.length==0" (click)="register()" block outline color="light">Registrarse</button>
-      </ion-list>
-    </ion-card-content>
-  </ion-card>
+  <ion-grid>
+    <ion-row align-items-center>
+      <ion-col col-12 text-center>
+        <ion-card>
+          <ion-card-header *ngIf="option=='login'">
+            Iniciar sesión en SMARTCART
+          </ion-card-header>
+          <ion-card-header *ngIf="option=='register'">
+            Registrate en SMARTCART
+          </ion-card-header>
+          <ion-card-content>
+            <form [formGroup]="loginForm" novalidate>
+              <ion-list *ngIf="option=='login'" no-line>
+                <ion-item>
+                  <ion-input type="text" formControlName="email" placeholder="Email"></ion-input>
+                </ion-item>
+                <ion-item>
+                  <ion-input formControlName="password" placeholder="Contraseña"></ion-input>
+                </ion-item>
+                <button ion-button
+                        [disabled]="!loginForm.valid"
+                        (click)="login()" block outline color="light">Login
+                </button>
+                <p>Ó</p>
+                <button ion-button block color="facebook">
+                  <ion-icon name="logo-facebook"></ion-icon>
+                  Login con facebook
+                </button>
+                <button ion-button block color="googleplus">
+                  <ion-icon name="logo-googleplus"></ion-icon>
+                  Login con google+
+                </button>
+              </ion-list>
+            </form>
+            <form [formGroup]="registerForm" novalidate>
+              <ion-list *ngIf="option=='register'" no-line>
+                <ion-item>
+                  <ion-input type="text" formControlName="name" placeholder="Nombre"></ion-input>
+                </ion-item>
+                <div text-left *ngIf="registerForm.get('name').hasError('required') && registerForm.get('name').dirty">
+                  <i ion-text item-left text-left>El nombre es requerido.</i>
+                </div>
+                <ion-item>
+                  <ion-input type="text" formControlName="last_name" placeholder="Apellido"></ion-input>
+                </ion-item>
+                <div text-left *ngIf="registerForm.get('last_name').hasError('required') && registerForm.get('last_name').dirty">
+                  <i ion-text item-left text-left>El apellido es requerido.</i>
+                </div>
+                <ion-item>
+                  <ion-input type="email" formControlName="email" placeholder="Email"></ion-input>
+                </ion-item>
+                <div text-left *ngIf="registerForm.get('email').hasError('required') && registerForm.get('email').dirty">
+                  <i ion-text item-left text-left>El email es requerido.</i>
+                </div>
+                <ion-item>
+                  <ion-input type="password" formControlName="password" placeholder="Contraseña"></ion-input>
+                </ion-item>
+                <div text-left *ngIf="registerForm.get('password').hasError('required') && registerForm.get('password').dirty">
+                  <i ion-text item-left text-left>El password es requerido.</i>
+                </div>
+                <button ion-button
+                        [disabled]="!registerForm.valid"
+                        (click)="register()" block outline color="light">Registrarse
+                </button>
+              </ion-list>
+            </form>
+          </ion-card-content>
+        </ion-card>
 
-  <button *ngIf="option=='login'" (click)="toggleOption()" class="bottom" ion-button clear full color="light">¿No tienes
-    una cuenta? Regístrate
-  </button>
-  <button *ngIf="option=='register'" (click)="toggleOption()" class="bottom" ion-button clear full color="light">¿Ya
-    tienes una cuenta? Hace login
-  </button>
+        <button *ngIf="option=='login'" (click)="toggleOption()" ion-button clear full color="light">¿No
+          tienes
+          una cuenta? Regístrate
+        </button>
+        <button *ngIf="option=='register'" (click)="toggleOption()" ion-button clear full color="light">¿Ya
+          tienes una cuenta? Hace login
+        </button>
+
+      </ion-col>
+    </ion-row>
+
+
+  </ion-grid>
+
 </ion-content>
 
 
