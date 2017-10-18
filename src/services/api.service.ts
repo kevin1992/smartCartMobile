@@ -2,6 +2,8 @@ import {Injectable} from '@angular/core';
 import {Http, RequestOptions, Response, Headers} from '@angular/http';
 import * as _ from 'lodash';
 import {Observable} from "rxjs";
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/throw';
 import {LoadingController, ToastController} from "ionic-angular";
 /**
  * Created by Kevin on 22/9/2017.
@@ -67,10 +69,13 @@ export class ApiService {
 
       return res.json()
     }).catch((err) => {
+
+
+
       loader.dismiss().then((_) => {
       });
 
-      if (err.error && err.error.validation == 'ValidationException') {
+      if (err.status == 401) {
         let toast = this.toastCtrl.create({
           message: "Credenciales invalidas",
           duration: 3000
@@ -78,15 +83,22 @@ export class ApiService {
         toast.present();
       } else {
         if (err.error) {
-          let toast = this.toastCtrl.create({
+
+          let toastObj = {
             message: "Ocurrio un error",
             duration: 3000
-          });
+          };
+
+          if(err.message){
+            toastObj.message = err.message;
+          }
+
+          let toast = this.toastCtrl.create(toastObj);
           toast.present();
         }
       }
 
-      console.log(err);
+      return Observable.throw('Internal server error');
     });
 
   }

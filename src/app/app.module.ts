@@ -26,6 +26,7 @@ import {AsociarCompraPage} from "../pages/asociar-compra/asociar-compra";
 import {IonicStorageModule} from "@ionic/storage";
 import {ApiService} from "../services/api.service";
 import {HttpModule} from "@angular/http";
+import {ReactiveFormsModule, FormsModule} from "@angular/forms";
 
 const cloudSettings: CloudSettings = {
   'core': {
@@ -67,9 +68,15 @@ const cloudSettings: CloudSettings = {
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp,{
+      scrollPadding: false,
+      scrollAssist: false,
+      autoFocusAssist: false
+    }),
     CloudModule.forRoot(cloudSettings),
-    IonicStorageModule.forRoot(),HttpModule
+    IonicStorageModule.forRoot(),HttpModule,
+    FormsModule,                               // <========== Add this line!
+    ReactiveFormsModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

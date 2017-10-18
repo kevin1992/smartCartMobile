@@ -66,5 +66,5 @@ export class MyApp {
 
 
 export const API = {
-  URL:'http://localhost:8080/smartcart/public/index.php/api/'
+  URL:'/api/'
 };
