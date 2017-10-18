@@ -48,7 +48,7 @@ export class LoginPage {
   }
 
   login(){
-    this.api.post(API.URL + "login", {email: this.data.user, password: this.data.password},{}).subscribe((data)=>{
+    this.api.post(API.URL + "login", {email: this.data.user, password: this.data.password},{mock:{}}).subscribe((data)=>{
 
       window.localStorage.setItem('smartCart-auth',data.token_type+' '+data.access_token)
       this.goMain();

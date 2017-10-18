@@ -13,7 +13,7 @@
 </ion-header>
 
 <ion-content>
-
+  <ion-card-content>
   <ion-list>
     <button (click)="verProducto(producto)" ion-item *ngFor="let producto of productos" >
       <p item-left>{{ producto.name }} (x{{producto.cantidad}}u)</p>
@@ -24,5 +24,5 @@
       <h3 item-right>{{getTotal() | currency:"USD":true}}</h3>
     </ion-item>
   </ion-list>
-
+  </ion-card-content>
 </ion-content>

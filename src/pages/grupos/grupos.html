@@ -13,13 +13,14 @@
 </ion-header>
 
 <ion-content>
-
+<ion-card>
   <ion-list >
     <ion-spinner *ngIf="loading"></ion-spinner>
     <button  ion-item *ngFor="let grupo of grupos" (click)="itemSelected(grupo)">
       {{ grupo.name }}
     </button>
   </ion-list>
+</ion-card>
 
   <ion-fab right bottom>
 

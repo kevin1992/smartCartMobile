@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import {IonicPage, NavController, NavParams, ActionSheetController} from 'ionic-angular';
+import {ListasPage} from "../listas/listas";
 import {DetalleListaPage} from "../detalle-lista/detalle-lista";
+import { AlertController } from 'ionic-angular';
 
 /**
  * Generated class for the DetalleGrupoPage page.
@@ -24,7 +26,8 @@ export class DetalleGrupoPage {
     {name:'Cristobal'},
   ]
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,public actionSheetCtrl:ActionSheetController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, public actionSheetCtrl:ActionSheetController) {
+
     console.log(this.navParams.get('nombre'));
     this.nombreDelGrupo = this.navParams.get('nombre');
 
@@ -58,10 +61,47 @@ export class DetalleGrupoPage {
     actionSheet.present();
   }
 
-  verLista(){
+  verListas(){
+    this.navCtrl.push(ListasPage);
+  }
+
+  verListaGrupo(){
     this.navCtrl.push(DetalleListaPage);
   }
 
+  //Boton mas para agregar usuarios
+  doPromptNewMember() {
+    let prompt = this.alertCtrl.create({
+      title: 'Nuevo Integrante',
+      message: "Ingrese el nombre del nuevo integrante del grupo",
+      inputs: [
 
+        {
+          name: 'name',
+          placeholder: 'Nombre del integrante'
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancelar',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Crear',
+          handler: data => {
+            this.navCtrl.push(DetalleGrupoPage,{nombre:data.name});
+            console.log('Saved clicked');
+          }
+        }
+      ]
+    });
+    prompt.present();
+  }
 
+  guardarGrupo()
+  {
+    //Chequea los valores de las variables y realiza los inserts o updates de los cambios en la vista
+  }
 }

@@ -8,6 +8,7 @@ import {MyApp} from './app.component';
 import {HomePage} from '../pages/home/home';
 import {LoginPage} from '../pages/login/login';
 import {GruposPage} from "../pages/grupos/grupos";
+import {ListasPage} from "../pages/listas/listas";
 
 import {CloudSettings, CloudModule} from '@ionic/cloud-angular';
 import {ComprasPage} from "../pages/compras/compras";
@@ -54,6 +55,7 @@ const cloudSettings: CloudSettings = {
     HistorialComprasPage,
     LoginPage,
     GruposPage,
+    ListasPage,
     ConfiguracionPage,
     DetalleCompraPage,
     DetalleGrupoPage,
@@ -79,6 +81,7 @@ const cloudSettings: CloudSettings = {
     HistorialComprasPage,
     LoginPage,
     GruposPage,
+    ListasPage,
     ConfiguracionPage,
     DetalleCompraPage,
     DetalleGrupoPage,
