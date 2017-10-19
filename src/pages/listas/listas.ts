@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 import {ApiService} from "../../services/api.service";
 import {API} from "../../app/app.component";
+import {DetalleListaPage} from "../detalle-lista/detalle-lista";
 /**
  * Generated class for the ListasPage page.
  *
@@ -31,8 +32,10 @@ export class ListasPage {
 
   listas = [];
   loading = false;
+  nombreDelGrupo:string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController,public apiService:ApiService) {
+    this.nombreDelGrupo = this.navParams.get('nombreGrupo');
   }
 
   ionViewDidLoad() {
@@ -49,9 +52,8 @@ export class ListasPage {
 
   }
 
-  itemSelected(grupo){
-    //Crear una nueva page que tenga el listado de listas
-    //   this.navCtrl.push(DetalleListaPage,{nombre:grupo.name,id:grupo.id});
+  itemSelected(lista){
+    this.navCtrl.push(DetalleListaPage,{nombreLista:lista.name,id:lista.id});
   }
 
   doPromptNewList() {
@@ -76,6 +78,7 @@ export class ListasPage {
           handler: data => {
             //Crear la page para ingresar al listado de listas
             //this.navCtrl.push(DetalleListaPage,{nombre:data.name});
+            this.listas.push({name:data.name});
             console.log('Saved clicked');
           }
         }

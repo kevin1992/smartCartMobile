@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { AlertController } from 'ionic-angular';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import {HomePage} from "../home/home";
+import { NavController, NavParams } from 'ionic-angular';
 import {DetalleGrupoPage} from "../detalle-grupo/detalle-grupo";
 import {ApiService} from "../../services/api.service";
 import {API} from "../../app/app.component";
@@ -44,8 +43,7 @@ export class GruposPage {
       this.grupos = grupos;
       this.loading = false;
     });
-
-  }
+ }
 
   itemSelected(grupo){
     this.navCtrl.push(DetalleGrupoPage,{nombre:grupo.name,id:grupo.id});
@@ -71,7 +69,8 @@ export class GruposPage {
         {
           text: 'Crear',
           handler: data => {
-            this.navCtrl.push(DetalleGrupoPage,{nombre:data.name});
+            //this.navCtrl.push(DetalleGrupoPage,{nombre:data.name});
+            this.grupos.push({name:data.name});
             console.log('Saved clicked');
           }
         }

@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import {DetalleCompraPage} from "../detalle-compra/detalle-compra";
-import {DetalleProductoPage} from "../detalle-producto/detalle-producto";
+import {IonicPage, NavController, NavParams, ActionSheetController} from 'ionic-angular';
+import { AlertController } from 'ionic-angular';
 
 /**
  * Generated class for the DetalleListaPage page.
@@ -17,26 +16,81 @@ import {DetalleProductoPage} from "../detalle-producto/detalle-producto";
 })
 export class DetalleListaPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  }
-
-  productos = [
-    {name:'Coca Cola 2.25lt',cantidad:1,precio:50},
-    {name:'Arroz 300gr',cantidad:3,precio:12.30},
-    {name:'Leche 1lt',cantidad:2,precio:50},
-    {name:'Milanesas 1kg',cantidad:1,precio:120}
+  nombreDeLista:string;
+  products=[
+    {name:'Coca Cola 2.25lt'},
+    {name:'Arroz 300gr'},
+    {name:'Leche 1lt'},
+    {name:'Milanesas 1kg'},
   ]
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, public actionSheetCtrl:ActionSheetController) {
+
+    console.log(this.navParams.get('nombreLista'));
+    this.nombreDeLista = this.navParams.get('nombreLista');
+  }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad DetalleListaPage');
   }
 
-  getTotal(){
-    return this.productos.map((p)=>{return p.precio*p.cantidad}).reduce((a, b) => a + b, 0);
+  //Boton mas para agregar productos
+  //********************************
+  //SE TIENE QUE REEMPLAZAR POR UN BUSCADOR
+  //********************************
+  doPromptNewProduct() {
+    let prompt = this.alertCtrl.create({
+      title: 'Nuevo Producto',
+      message: "Ingrese el nombre del producto para agregarlo a la lista",
+      inputs: [
+        {
+          name: 'name',
+          placeholder: 'Nombre del Producto'
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancelar',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Crear',
+          handler: data => {
+            //this.navCtrl.push(DetalleListaPage,{nombre:data.name});
+            this.products.push({name:data.name});
+            console.log('Saved clicked');
+          }
+        }
+      ]
+    });
+    prompt.present();
   }
 
-  verProducto(producto){
-    this.navCtrl.push(DetalleProductoPage);
-  }
 
+  /*  showDelete(member) {
+      let actionSheet = this.actionSheetCtrl.create({
+        title: member.name,
+        buttons: [
+          {
+            text: 'Eliminar del grupo',
+            role: 'destructive',
+            handler: () => {
+              console.log('Destructive clicked');
+            }
+          },
+          {
+            text: 'Cancelar',
+            role: 'cancel',
+            handler: () => {
+              console.log('Cancel clicked');
+            }
+          }
+        ]
+      });
+
+      actionSheet.present();
+    }
+  */
 }

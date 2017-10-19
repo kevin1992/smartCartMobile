@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import {IonicPage, NavController, NavParams, ActionSheetController} from 'ionic-angular';
 import {ListasPage} from "../listas/listas";
-import {DetalleListaPage} from "../detalle-lista/detalle-lista";
 import { AlertController } from 'ionic-angular';
 
 /**
@@ -61,13 +60,13 @@ export class DetalleGrupoPage {
     actionSheet.present();
   }
 
-  verListas(){
-    this.navCtrl.push(ListasPage);
+  verListas(nombreDelGrupo){
+    this.navCtrl.push(ListasPage,{nombreGrupo:nombreDelGrupo});
   }
 
-  verListaGrupo(){
-    this.navCtrl.push(DetalleListaPage);
-  }
+  //verListaGrupo(){
+  //  this.navCtrl.push(DetalleListaPage);
+  //}
 
   //Boton mas para agregar usuarios
   doPromptNewMember() {
@@ -91,17 +90,13 @@ export class DetalleGrupoPage {
         {
           text: 'Crear',
           handler: data => {
-            this.navCtrl.push(DetalleGrupoPage,{nombre:data.name});
+            //this.navCtrl.push(DetalleGrupoPage,{nombre:data.name});
+            this.members.push({name:data.name});
             console.log('Saved clicked');
           }
         }
       ]
     });
     prompt.present();
-  }
-
-  guardarGrupo()
-  {
-    //Chequea los valores de las variables y realiza los inserts o updates de los cambios en la vista
   }
 }

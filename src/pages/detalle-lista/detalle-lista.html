@@ -1,28 +1,27 @@
 <ion-header>
   <ion-navbar color="primary">
-    <ion-buttons start>
-
-    </ion-buttons>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>
-      Lista grupo familia
-    </ion-title>
+    <ion-title>Detalle {{nombreDeLista}}</ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content>
-  <ion-card-content>
-  <ion-list>
-    <button (click)="verProducto(producto)" ion-item *ngFor="let producto of productos" >
-      <p item-left>{{ producto.name }} (x{{producto.cantidad}}u)</p>
-      <p item-right>{{ producto.precio*producto.cantidad |currency:"USD":true}}</p>
-    </button>
-    <ion-item>
-      <h3 item-left>Total</h3>
-      <h3 item-right>{{getTotal() | currency:"USD":true}}</h3>
-    </ion-item>
-  </ion-list>
-  </ion-card-content>
+<ion-content >
+  <ion-card>
+    <ion-card-header>
+      {{nombreDeLista}} ({{products.length}} productos)
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-list>
+        <button ion-item *ngFor="let product of products">
+          {{product.name}}
+        </button>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+  <!-- el mensaje de alerta incluye un buscador y seleccionador de producto -->
+  <ion-fab right bottom>
+    <button ion-fab color="primary" (click)="doPromptNewProduct()"><ion-icon name="add"></ion-icon></button>
+  </ion-fab>
+
 </ion-content>
+
