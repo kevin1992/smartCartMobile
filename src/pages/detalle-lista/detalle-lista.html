@@ -4,24 +4,49 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content >
+<ion-content>
   <ion-card>
     <ion-card-header>
       {{nombreDeLista}} ({{products.length}} productos)
     </ion-card-header>
-
-    <ion-card-content>
-      <ion-list>
-        <button ion-item *ngFor="let product of products">
-          {{product.name}}
-        </button>
-      </ion-list>
-    </ion-card-content>
   </ion-card>
+  <!--
+      <ion-card-content>
+        <ion-list>
+          <button ion-item *ngFor="let product of products">
+            {{product.name}}
+          </button>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+  -->
   <!-- el mensaje de alerta incluye un buscador y seleccionador de producto -->
-  <ion-fab right bottom>
-    <button ion-fab color="primary" (click)="doPromptNewProduct()"><ion-icon name="add"></ion-icon></button>
-  </ion-fab>
+    <ion-fab right bottom>
+      <button ion-fab color="primary" (click)="searchNewProduct()"><ion-icon name="add"></ion-icon></button>
+    </ion-fab>
+  <!--
+    </ion-content>
+    -->
+ <!--
+  <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+  <ion-card>
+    <ion-list>
+      <button ion-item *ngFor="let product of products" (click)="itemSelected(lista)">
+        {{ product.name }}
+      </button>
+    </ion-list>
+  </ion-card>
+  -->
 
+      <ion-content>
+        <ion-card>
+          <ion-list>
+            <ion-spinner *ngIf="loading"></ion-spinner>
+            <!--Agregar boton + y - con un box que indique la cantidad de productos-->
+            <button  ion-item *ngFor="let product of products">
+              {{ product.name }}
+            </button>
+          </ion-list>
+        </ion-card>
+      </ion-content>
 </ion-content>
-

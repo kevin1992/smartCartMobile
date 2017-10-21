@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {IonicPage, NavController, NavParams, ActionSheetController} from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
+import {ProductosPage} from "../productos/productos";
 
 /**
  * Generated class for the DetalleListaPage page.
@@ -30,44 +31,17 @@ export class DetalleListaPage {
     this.nombreDeLista = this.navParams.get('nombreLista');
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad DetalleListaPage');
-  }
+    ionViewDidLoad() {
+      console.log('ionViewDidLoad DetalleListaPage');
+    }
 
-  //Boton mas para agregar productos
-  //********************************
-  //SE TIENE QUE REEMPLAZAR POR UN BUSCADOR
-  //********************************
-  doPromptNewProduct() {
-    let prompt = this.alertCtrl.create({
-      title: 'Nuevo Producto',
-      message: "Ingrese el nombre del producto para agregarlo a la lista",
-      inputs: [
-        {
-          name: 'name',
-          placeholder: 'Nombre del Producto'
-        },
-      ],
-      buttons: [
-        {
-          text: 'Cancelar',
-          handler: data => {
-            console.log('Cancel clicked');
-          }
-        },
-        {
-          text: 'Crear',
-          handler: data => {
-            //this.navCtrl.push(DetalleListaPage,{nombre:data.name});
-            this.products.push({name:data.name});
-            console.log('Saved clicked');
-          }
-        }
-      ]
-    });
-    prompt.present();
+    //Boton mas para agregar productos
+    //********************************
+    //SE TIENE QUE REEMPLAZAR POR UN BUSCADOR
+    //********************************
+    searchNewProduct() {
+      this.navCtrl.push(ProductosPage);
   }
-
 
   /*  showDelete(member) {
       let actionSheet = this.actionSheetCtrl.create({

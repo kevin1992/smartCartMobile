@@ -18,6 +18,7 @@ import {ConfiguracionPage} from "../pages/configuracion/configuracion";
 import {DetalleCompraPage} from "../pages/detalle-compra/detalle-compra";
 import {DetalleGrupoPage} from "../pages/detalle-grupo/detalle-grupo";
 import {DetalleListaPage} from "../pages/detalle-lista/detalle-lista";
+import {ProductosPage} from "../pages/productos/productos";
 import {DetalleProductoPage} from "../pages/detalle-producto/detalle-producto";
 import {ListasGrupoPage} from "../pages/listas-grupo/listas-grupo";
 import {MisComprasPage} from "../pages/mis-compras/mis-compras";
@@ -62,6 +63,7 @@ const cloudSettings: CloudSettings = {
     DetalleGrupoPage,
     AsociarCompraPage,
     DetalleListaPage,
+    ProductosPage,
     DetalleProductoPage,
     ListasGrupoPage,
     MisComprasPage
@@ -93,6 +95,7 @@ const cloudSettings: CloudSettings = {
     DetalleCompraPage,
     DetalleGrupoPage,
     DetalleListaPage,
+    ProductosPage,
     DetalleProductoPage,
     ListasGrupoPage,
     MisComprasPage
