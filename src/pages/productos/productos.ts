@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {DetalleListaPage} from "../detalle-lista/detalle-lista";
 
 /**
  * Generated class for the ProductosPage page.
@@ -16,6 +17,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 export class ProductosPage {
 
   newProducts = [];
+  nombreNuevoProducto:string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.initializeItems();
@@ -47,6 +49,11 @@ export class ProductosPage {
         return (newProduct.name.toLowerCase().indexOf(val.toLowerCase()) > -1);
       })
     }
+  }
+
+  newProductSelected(newProduct){
+    // hacer un INSERT a la lista de productos actual
+    this.navCtrl.pop(DetalleListaPage);
   }
 
   ionViewDidLoad() {

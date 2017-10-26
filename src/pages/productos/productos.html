@@ -13,7 +13,7 @@
 
 <ion-content>
     <ion-list>
-      <button ion-item *ngFor="let newProduct of newProducts">
+      <button ion-item *ngFor="let newProduct of newProducts" (click)="newProductSelected(newProduct)">
         {{ newProduct.name }}
       </button>
     </ion-list>

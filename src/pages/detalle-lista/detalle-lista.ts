@@ -18,6 +18,8 @@ import {ProductosPage} from "../productos/productos";
 export class DetalleListaPage {
 
   nombreDeLista:string;
+  producto: string = "1";
+  //nombreNuevoProducto:string;
   products=[
     {name:'Coca Cola 2.25lt'},
     {name:'Arroz 300gr'},
@@ -29,16 +31,14 @@ export class DetalleListaPage {
 
     console.log(this.navParams.get('nombreLista'));
     this.nombreDeLista = this.navParams.get('nombreLista');
+    //this.nombreNuevoProducto = this.navParams.get('nombreNuevoProducto');
+    //this.products.push({name:this.nombreNuevoProducto});
   }
 
     ionViewDidLoad() {
       console.log('ionViewDidLoad DetalleListaPage');
     }
 
-    //Boton mas para agregar productos
-    //********************************
-    //SE TIENE QUE REEMPLAZAR POR UN BUSCADOR
-    //********************************
     searchNewProduct() {
       this.navCtrl.push(ProductosPage);
   }
