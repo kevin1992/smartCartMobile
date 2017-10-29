@@ -8,6 +8,7 @@ import {MyApp} from './app.component';
 import {HomePage} from '../pages/home/home';
 import {LoginPage} from '../pages/login/login';
 import {GruposPage} from "../pages/grupos/grupos";
+import {ListasPage} from "../pages/listas/listas";
 
 import {CloudSettings, CloudModule} from '@ionic/cloud-angular';
 import {ComprasPage} from "../pages/compras/compras";
@@ -17,8 +18,10 @@ import {ConfiguracionPage} from "../pages/configuracion/configuracion";
 import {DetalleCompraPage} from "../pages/detalle-compra/detalle-compra";
 import {DetalleGrupoPage} from "../pages/detalle-grupo/detalle-grupo";
 import {DetalleListaPage} from "../pages/detalle-lista/detalle-lista";
+import {ProductosPage} from "../pages/productos/productos";
 import {DetalleProductoPage} from "../pages/detalle-producto/detalle-producto";
 import {ListasGrupoPage} from "../pages/listas-grupo/listas-grupo";
+import {ClientesPage} from "../pages/clientes/clientes";
 import {MisComprasPage} from "../pages/mis-compras/mis-compras";
 import {BarcodeScanner} from "@ionic-native/barcode-scanner";
 import {AsociarCompraPage} from "../pages/asociar-compra/asociar-compra";
@@ -55,11 +58,14 @@ const cloudSettings: CloudSettings = {
     HistorialComprasPage,
     LoginPage,
     GruposPage,
+    ListasPage,
     ConfiguracionPage,
     DetalleCompraPage,
     DetalleGrupoPage,
     AsociarCompraPage,
     DetalleListaPage,
+    ClientesPage,
+    ProductosPage,
     DetalleProductoPage,
     ListasGrupoPage,
     MisComprasPage
@@ -86,10 +92,13 @@ const cloudSettings: CloudSettings = {
     HistorialComprasPage,
     LoginPage,
     GruposPage,
+    ListasPage,
     ConfiguracionPage,
     DetalleCompraPage,
     DetalleGrupoPage,
     DetalleListaPage,
+    ClientesPage,
+    ProductosPage,
     DetalleProductoPage,
     ListasGrupoPage,
     MisComprasPage

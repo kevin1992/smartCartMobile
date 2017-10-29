@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import {DetalleCompraPage} from "../detalle-compra/detalle-compra";
-import {DetalleProductoPage} from "../detalle-producto/detalle-producto";
+import {IonicPage, NavController, NavParams, ActionSheetController} from 'ionic-angular';
+import { AlertController } from 'ionic-angular';
+import {ProductosPage} from "../productos/productos";
 
 /**
  * Generated class for the DetalleListaPage page.
@@ -17,26 +17,54 @@ import {DetalleProductoPage} from "../detalle-producto/detalle-producto";
 })
 export class DetalleListaPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  }
-
-  productos = [
-    {name:'Coca Cola 2.25lt',cantidad:1,precio:50},
-    {name:'Arroz 300gr',cantidad:3,precio:12.30},
-    {name:'Leche 1lt',cantidad:2,precio:50},
-    {name:'Milanesas 1kg',cantidad:1,precio:120}
+  nombreDeLista:string;
+  producto: string = "1";
+  //nombreNuevoProducto:string;
+  products=[
+    {name:'Coca Cola 2.25lt'},
+    {name:'Arroz 300gr'},
+    {name:'Leche 1lt'},
+    {name:'Milanesas 1kg'},
   ]
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad DetalleListaPage');
+  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, public actionSheetCtrl:ActionSheetController) {
+
+    console.log(this.navParams.get('nombreLista'));
+    this.nombreDeLista = this.navParams.get('nombreLista');
+    //this.nombreNuevoProducto = this.navParams.get('nombreNuevoProducto');
+    //this.products.push({name:this.nombreNuevoProducto});
   }
 
-  getTotal(){
-    return this.productos.map((p)=>{return p.precio*p.cantidad}).reduce((a, b) => a + b, 0);
+    ionViewDidLoad() {
+      console.log('ionViewDidLoad DetalleListaPage');
+    }
+
+    searchNewProduct() {
+      this.navCtrl.push(ProductosPage);
   }
 
-  verProducto(producto){
-    this.navCtrl.push(DetalleProductoPage);
-  }
+  /*  showDelete(member) {
+      let actionSheet = this.actionSheetCtrl.create({
+        title: member.name,
+        buttons: [
+          {
+            text: 'Eliminar del grupo',
+            role: 'destructive',
+            handler: () => {
+              console.log('Destructive clicked');
+            }
+          },
+          {
+            text: 'Cancelar',
+            role: 'cancel',
+            handler: () => {
+              console.log('Cancel clicked');
+            }
+          }
+        ]
+      });
 
+      actionSheet.present();
+    }
+  */
 }

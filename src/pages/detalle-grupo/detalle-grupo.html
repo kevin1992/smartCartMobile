@@ -12,35 +12,60 @@
 
 </ion-header>
 
-<ion-content >
+<ion-content>
   <ion-card>
     <ion-card-header>
-      {{nombreDelGrupo}} ({{members.length}} integrantes)
+      {{grupo.nombre || grupo.name }} ({{grupo.members.length}} integrantes)
     </ion-card-header>
 
     <ion-card-content>
       <ion-list>
-        <button ion-item><ion-icon name="add"></ion-icon><b>Agregar integrante</b></button>
-        <button ion-item (click)="showDelete(member)" *ngFor="let member of members">
+        <ion-item *ngIf="grupo.members.length==0">
+          Este grupo no tiene miembros, puede agregar uno pulsando el icono de +
+        </ion-item>
+        <button ion-item (click)="showDelete(member)" *ngFor="let member of grupo.members">
           {{member.name}}
         </button>
       </ion-list>
     </ion-card-content>
-
   </ion-card>
 
-  <ion-row>
-    <ion-col col-6 offset-3 >
-      <button (click)="verLista()" ion-button full>
-        Ver Lista
-      </button>
-    </ion-col>
-  </ion-row>
-  <ion-row>
-    <ion-col col-6 offset-3 >
-      <button ion-button full>
-        Ver Compras del grupo
-      </button>
-    </ion-col>
-  </ion-row>
+  <ion-fab right bottom>
+    <button ion-fab color="primary" (click)="searchNewMember()">
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
+
+  <div *ngIf="isNew">
+    <ion-row>
+      <ion-col col-6 offset-3>
+        <button (click)="save()" ion-button full>
+          Crear Grupo
+        </button>
+      </ion-col>
+    </ion-row>
+  </div>
+  <div *ngIf="!isNew">
+    <ion-row>
+      <ion-col col-6 offset-3>
+        <button (click)="verListas()" ion-button full>
+          Ver Lista
+        </button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-6 offset-3>
+        <button (click)="verListaGrupo()" ion-button full>
+          Ver Compras del grupo
+        </button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-6 offset-3>
+        <button (click)="update()" ion-button full>
+          Guardar Grupo
+        </button>
+      </ion-col>
+    </ion-row>
+  </div>
 </ion-content>

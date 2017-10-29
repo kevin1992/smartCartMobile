@@ -1,6 +1,11 @@
-import { Component } from '@angular/core';
-import {IonicPage, NavController, NavParams, ActionSheetController} from 'ionic-angular';
-import {DetalleListaPage} from "../detalle-lista/detalle-lista";
+import {Component} from '@angular/core';
+import {IonicPage, NavController, NavParams, ActionSheetController, ToastController} from 'ionic-angular';
+import {ListasPage} from "../listas/listas";
+import {AlertController} from 'ionic-angular';
+import {ClientesPage} from "../clientes/clientes";
+import * as _ from 'lodash';
+import {ApiService} from "../../services/api.service";
+import {API} from "../../app/app.component";
 
 /**
  * Generated class for the DetalleGrupoPage page.
@@ -16,17 +21,16 @@ import {DetalleListaPage} from "../detalle-lista/detalle-lista";
 })
 export class DetalleGrupoPage {
 
-  nombreDelGrupo:string;
-  members=[
-    {name:'Juan'},
-    {name:'Azul'},
-    {name:'Florencia'},
-    {name:'Cristobal'},
-  ]
+  grupo: any;
+  isNew: boolean;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,public actionSheetCtrl:ActionSheetController) {
-    console.log(this.navParams.get('nombre'));
-    this.nombreDelGrupo = this.navParams.get('nombre');
+
+  constructor(public navCtrl: NavController, public navParams: NavParams,public toastCtrl: ToastController, public alertCtrl: AlertController, public actionSheetCtrl: ActionSheetController,public apiService:ApiService) {
+
+    console.log(this.navParams.get('grupo'));
+    this.grupo = this.navParams.get('grupo');
+    this.isNew = this.navParams.get('new');
+
 
   }
 
@@ -42,6 +46,9 @@ export class DetalleGrupoPage {
           text: 'Eliminar del grupo',
           role: 'destructive',
           handler: () => {
+            _.remove(this.grupo.members, (m) => {
+              return m.id == member.id;
+            });
             console.log('Destructive clicked');
           }
         },
@@ -58,10 +65,33 @@ export class DetalleGrupoPage {
     actionSheet.present();
   }
 
-  verLista(){
-    this.navCtrl.push(DetalleListaPage);
+  verListas() {
+    this.navCtrl.push(ListasPage, {grupo: this.grupo});
   }
 
+  save(){
+    let saveObj = _.cloneDeep({name:this.grupo.nombre,members:this.grupo.members.map((m)=>{return m.id;})});
+
+    this.apiService.post(API.URL+"groups",saveObj,{successMsg:'El grupo fue creado satisfactoriamente!'}).subscribe((data)=>{
+      this.navCtrl.pop();
+    });
+  }
+
+  update(){
+    let saveObj = _.cloneDeep({id:this.grupo.id,name:this.grupo.name,members:this.grupo.members.map((m)=>{return m.id;})});
+
+    this.apiService.put(API.URL+"groups/"+this.grupo.id,saveObj,{successMsg:'El grupo fue modificado satisfactoriamente!'}).subscribe((data)=>{
+      this.navCtrl.pop();
+    });
+  }
+
+  //verListaGrupo(){
+  //  this.navCtrl.push(DetalleListaPage);
+  //}
+
+  searchNewMember() {
+    this.navCtrl.push(ClientesPage, {grupo: this.grupo});
+  }
 
 
 }

@@ -1,28 +1,39 @@
 <ion-header>
   <ion-navbar color="primary">
-    <ion-buttons start>
-
-    </ion-buttons>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>
-      Lista grupo familia
-    </ion-title>
+    <ion-title>Detalle {{nombreDeLista}}</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
+  <ion-card>
+    <ion-card-header>
+      {{nombreDeLista}} ({{products.length}} productos)
+    </ion-card-header>
+  </ion-card>
 
-  <ion-list>
-    <button (click)="verProducto(producto)" ion-item *ngFor="let producto of productos" >
-      <p item-left>{{ producto.name }} (x{{producto.cantidad}}u)</p>
-      <p item-right>{{ producto.precio*producto.cantidad |currency:"USD":true}}</p>
-    </button>
-    <ion-item>
-      <h3 item-left>Total</h3>
-      <h3 item-right>{{getTotal() | currency:"USD":true}}</h3>
-    </ion-item>
-  </ion-list>
+    <ion-fab right bottom>
+      <button ion-fab color="primary" (click)="searchNewProduct()"><ion-icon name="add"></ion-icon></button>
+    </ion-fab>
 
+      <ion-content>
+        <ion-card>
+          <ion-list>
+            <ion-spinner *ngIf="loading"></ion-spinner>
+
+            <!--CORREGIR, los valores deberian setearse para cada product-->
+            <button ion-item *ngFor="let product of products">
+              <ion-label>{{ product.name }}</ion-label>
+              <ion-select [(ngModel)]="producto" interface="popover">
+                <ion-option value="1">1</ion-option>
+                <ion-option value="2">2</ion-option>
+                <ion-option value="3">3</ion-option>
+                <ion-option value="4">4</ion-option>
+                <ion-option value="5">5</ion-option>
+                <ion-option value="6">6</ion-option>
+                <ion-option value="7">7</ion-option>
+                </ion-select>
+            </button>
+          </ion-list>
+        </ion-card>
+      </ion-content>
 </ion-content>

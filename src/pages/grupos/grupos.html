@@ -13,17 +13,19 @@
 </ion-header>
 
 <ion-content>
-
+<ion-card>
   <ion-list >
     <ion-spinner *ngIf="loading"></ion-spinner>
+    <ion-item text-center *ngIf="grupos.length == 0">Usted no tiene ningun grupo, puede crear uno presionando el icono +</ion-item>
     <button  ion-item *ngFor="let grupo of grupos" (click)="itemSelected(grupo)">
       {{ grupo.name }}
     </button>
   </ion-list>
+</ion-card>
 
   <ion-fab right bottom>
 
-    <button ion-fab color="primary" (click)="doPrompt()"><ion-icon name="add"></ion-icon></button>
+    <button ion-fab color="primary" (click)="addGroup()"><ion-icon name="add"></ion-icon></button>
   </ion-fab>
 
 </ion-content>

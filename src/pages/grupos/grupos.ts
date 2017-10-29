@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
-import { AlertController } from 'ionic-angular';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import {HomePage} from "../home/home";
+import {Component} from '@angular/core';
+import {AlertController} from 'ionic-angular';
+import {NavController, NavParams} from 'ionic-angular';
 import {DetalleGrupoPage} from "../detalle-grupo/detalle-grupo";
 import {ApiService} from "../../services/api.service";
 import {API} from "../../app/app.component";
+import * as _ from 'lodash';
 
 /**
  * Generated class for the GruposPage page.
@@ -24,7 +24,7 @@ export class GruposPage {
   grupos = [];
   loading = false;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController,public apiService:ApiService) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, public apiService: ApiService) {
   }
 
 
@@ -32,26 +32,22 @@ export class GruposPage {
 //    this.navCtrl.push(HomePage);
 //  }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad GruposPage');
+  ionViewWillEnter() {
     this.loading = true;
-    this.apiService.get(API.URL+"/groups",{},{mock:[
-      {id:1,name:'Familia'},
-      {id:2,name:'Amigos'},
-      {id:3,name:'Abuelos'},
-      {id:4,name:'Novia'}
-    ]}).subscribe((grupos)=>{
+    this.apiService.get(API.URL + "groups", {}, {}).subscribe((grupos) => {
+      grupos.forEach((grupo) => {
+        grupo.members = _.cloneDeep(grupo.clients);
+      });
       this.grupos = grupos;
       this.loading = false;
     });
-
   }
 
-  itemSelected(grupo){
-    this.navCtrl.push(DetalleGrupoPage,{nombre:grupo.name,id:grupo.id});
+  itemSelected(grupo) {
+    this.navCtrl.push(DetalleGrupoPage, {grupo: grupo});
   }
 
-  doPrompt() {
+  addGroup() {
     let prompt = this.alertCtrl.create({
       title: 'Nuevo Grupo',
       message: "Ingrese el nombre del nuevo grupo",
@@ -71,8 +67,10 @@ export class GruposPage {
         {
           text: 'Crear',
           handler: data => {
-            this.navCtrl.push(DetalleGrupoPage,{nombre:data.name});
-            console.log('Saved clicked');
+            //this.navCtrl.push(DetalleGrupoPage,{nombre:data.name});
+            if (data.name && data.name.length > 0) {
+              this.navCtrl.push(DetalleGrupoPage, {grupo: {nombre: data.name, members: []}, new: true});
+            }
           }
         }
       ]

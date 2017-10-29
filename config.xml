@@ -89,4 +89,11 @@
     <plugin name="phonegap-plugin-push" spec="^2.0.0">
         <variable name="SENDER_ID" value="191023148223" />
     </plugin>
+    <plugin name="cordova-plugin-facebook4" spec="^1.9.1">
+        <variable name="APP_ID" value="171873930035831" />
+        <variable name="APP_NAME" value="com.dogmasolutions.smartcart" />
+    </plugin>
+    <plugin name="cordova-plugin-googleplus" spec="^5.1.1">
+        <variable name="REVERSED_CLIENT_ID" value="639485402393-ccjeoiukg0k2ilhvlb9ogr3rbv8tqqfg.apps.googleusercontent.com" />
+    </plugin>
 </widget>
