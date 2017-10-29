@@ -51,7 +51,7 @@ export class ProductosPage {
     }
   }
 
-  newProductSelected(newProduct){
+  newProductSelected(){
     // hacer un INSERT a la lista de productos actual
     this.navCtrl.pop(DetalleListaPage);
   }

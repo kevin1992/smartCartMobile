@@ -3,13 +3,11 @@ import {Platform} from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { LoginPage } from '../pages/login/login';
-import { GruposPage } from "../pages/grupos/grupos";
 import {
   Push,
   PushToken
 } from '@ionic/cloud-angular';
 import {ComprasPage} from "../pages/compras/compras";
-import {HistorialComprasPage} from "../pages/historial-compras/historial-compras";
 import {AsociarCompraPage} from "../pages/asociar-compra/asociar-compra";
 
 @Component({
@@ -18,14 +16,12 @@ import {AsociarCompraPage} from "../pages/asociar-compra/asociar-compra";
 
 export class MyApp {
   public rootPage: any;
-  public home = LoginPage;
+  public login = LoginPage;
   public compra = ComprasPage;
-  public hCompras = HistorialComprasPage;
-  public mGrupos = GruposPage;
   public asociarCompra = AsociarCompraPage;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,private push: Push) {
-    this.rootPage= LoginPage; // Aca agrego la pagina principal
+    this.rootPage= this.login; // Aca agrego la pagina principal
     platform.ready().then(() => {
 
 
@@ -42,8 +38,6 @@ export class MyApp {
           });
       }
 
-
-
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
@@ -58,11 +52,9 @@ export class MyApp {
 
   cerrarSesion(){
     window.localStorage.removeItem('smartCart-auth');
-    this.openPage(LoginPage);
+    this.openPage(this.login);
   }
 }
-
-
 
 export const API = {
   URL:'/api/'

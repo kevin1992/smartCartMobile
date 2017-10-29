@@ -6,14 +6,14 @@
 -->
 
   <ion-header>
-    <ion-navbar color="primary">
-      <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+    <ion-navbar color="light">
+      <ion-searchbar placeholder="Buscar producto" (ionInput)="getItems($event)"></ion-searchbar>
     </ion-navbar>
   </ion-header>
 
 <ion-content>
     <ion-list>
-      <button ion-item *ngFor="let newProduct of newProducts" (click)="newProductSelected(newProduct)">
+      <button ion-item *ngFor="let newProduct of newProducts" (click)="newProductSelected()">
         {{ newProduct.name }}
       </button>
     </ion-list>

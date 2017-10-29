@@ -17,17 +17,6 @@ import {DetalleListaPage} from "../detalle-lista/detalle-lista";
   templateUrl: 'listas.html',
 })
 
-/*export class ListasPage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ListasPage');
-  }
-
-}
-*/
 export class ListasPage {
 
   listas = [];

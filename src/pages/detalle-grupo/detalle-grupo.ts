@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {IonicPage, NavController, NavParams, ActionSheetController} from 'ionic-angular';
 import {ListasPage} from "../listas/listas";
 import { AlertController } from 'ionic-angular';
+import {ClientesPage} from "../clientes/clientes";
 
 /**
  * Generated class for the DetalleGrupoPage page.
@@ -68,7 +69,10 @@ export class DetalleGrupoPage {
   //  this.navCtrl.push(DetalleListaPage);
   //}
 
-  //Boton mas para agregar usuarios
+  searchNewMember(){
+    this.navCtrl.push(ClientesPage);
+  }
+
   doPromptNewMember() {
     let prompt = this.alertCtrl.create({
       title: 'Nuevo Integrante',
