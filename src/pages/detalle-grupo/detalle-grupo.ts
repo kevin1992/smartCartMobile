@@ -73,15 +73,14 @@ export class DetalleGrupoPage {
     this.navCtrl.push(ClientesPage);
   }
 
-  doPromptNewMember() {
+  editNameGroup(){
     let prompt = this.alertCtrl.create({
-      title: 'Nuevo Integrante',
-      message: "Ingrese el nombre del nuevo integrante del grupo",
+      title: 'Renombrar Grupo',
+      message: "Ingrese nuevo nombre del grupo",
       inputs: [
-
         {
           name: 'name',
-          placeholder: 'Nombre del integrante'
+          placeholder: 'Nuevo nombre del Grupo'
         },
       ],
       buttons: [
@@ -94,8 +93,8 @@ export class DetalleGrupoPage {
         {
           text: 'Crear',
           handler: data => {
-            //this.navCtrl.push(DetalleGrupoPage,{nombre:data.name});
-            this.members.push({name:data.name});
+            //1) Update del nombre de grupo
+            //2) Refrescar pantalla Detalle Grupo
             console.log('Saved clicked');
           }
         }

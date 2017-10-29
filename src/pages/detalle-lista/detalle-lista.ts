@@ -19,7 +19,6 @@ export class DetalleListaPage {
 
   nombreDeLista:string;
   producto: string = "1";
-  //nombreNuevoProducto:string;
   products=[
     {name:'Coca Cola 2.25lt'},
     {name:'Arroz 300gr'},
@@ -31,8 +30,6 @@ export class DetalleListaPage {
 
     console.log(this.navParams.get('nombreLista'));
     this.nombreDeLista = this.navParams.get('nombreLista');
-    //this.nombreNuevoProducto = this.navParams.get('nombreNuevoProducto');
-    //this.products.push({name:this.nombreNuevoProducto});
   }
 
     ionViewDidLoad() {
@@ -43,6 +40,35 @@ export class DetalleListaPage {
       this.navCtrl.push(ProductosPage);
   }
 
+  editNameList(){
+    let prompt = this.alertCtrl.create({
+      title: 'Renombrar Lista',
+      message: "Ingrese nuevo nombre de lista",
+      inputs: [
+        {
+          name: 'name',
+          placeholder: 'Nuevo nombre de Lista'
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancelar',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Crear',
+          handler: data => {
+            //1) Update del nombre de lista
+            //2) Refrescar pantalla Detalle Lista
+            console.log('Saved clicked');
+          }
+        }
+      ]
+    });
+    prompt.present();
+  }
   /*  showDelete(member) {
       let actionSheet = this.actionSheetCtrl.create({
         title: member.name,
