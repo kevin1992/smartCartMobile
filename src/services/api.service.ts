@@ -63,6 +63,23 @@ export class ApiService {
     }
 
     return this.http[method](url, data, {'headers': headers}).map((res: Response) => {
+
+      if(options.successMsg){
+
+
+        let toastObj = {
+          message: options.successMsg,
+          duration: 3000
+        };
+
+        let toast = this.toastCtrl.create(toastObj);
+        toast.present();
+
+      }
+
+      loader.dismiss().then((_) => {
+      });
+
       if (!res || !res['_body'] || res['_body'] === '') {
         return {};
       }
@@ -71,6 +88,7 @@ export class ApiService {
     }).catch((err) => {
 
 
+      let errorBody = JSON.parse(err._body);
 
       loader.dismiss().then((_) => {
       });
@@ -82,15 +100,20 @@ export class ApiService {
         });
         toast.present();
       } else {
-        if (err.error) {
+        if (errorBody.error) {
 
           let toastObj = {
             message: "Ocurrio un error",
             duration: 3000
           };
 
-          if(err.message){
-            toastObj.message = err.message;
+          if(errorBody.message){
+            toastObj.message = errorBody.message;
+          }
+
+          if(errorBody.data){
+            let key = Object.keys(errorBody.data)[0]
+            toastObj.message = errorBody.data[key];
           }
 
           let toast = this.toastCtrl.create(toastObj);

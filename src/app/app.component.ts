@@ -60,6 +60,7 @@ export class MyApp {
   cerrarSesion(){
     window.localStorage.removeItem('smartCart-auth');
     this.openPage(LoginPage);
+    window.location.reload();
   }
 }
 

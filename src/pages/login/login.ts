@@ -79,14 +79,13 @@ export class LoginPage {
   register() {
 
     this.api.post(API.URL + "register", {
-      name: this.data.name, last_name: this.data.last_name, "email": this.data.email,
-      "password": this.data.password
+      name: this.registerForm.get('name').value, last_name: this.registerForm.get('last_name').value, "email": this.registerForm.get('email').value,
+      "password": this.registerForm.get('password').value
     }, {
       successMsg: "El usuario fue creado correctamente"
     }).subscribe((data) => {
 
 
-      this.data = {};
       this.toggleOption();
 
     });
@@ -101,7 +100,9 @@ export class LoginPage {
       this.option = 'login'
     }
 
-    this.data = {};
+
+    this.registerForm.reset();
+    this.loginForm.reset();
 
   }
 

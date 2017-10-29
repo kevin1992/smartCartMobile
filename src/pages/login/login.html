@@ -27,9 +27,15 @@
                 <ion-item>
                   <ion-input type="text" formControlName="email" placeholder="Email"></ion-input>
                 </ion-item>
+                <div text-left *ngIf="loginForm.get('email').hasError('required') && loginForm.get('email').dirty">
+                  <i ion-text item-left text-left>El email es requerido.</i>
+                </div>
                 <ion-item>
-                  <ion-input formControlName="password" placeholder="Contraseña"></ion-input>
+                  <ion-input type="password" formControlName="password" placeholder="Contraseña"></ion-input>
                 </ion-item>
+                <div text-left *ngIf="loginForm.get('password').hasError('required') && loginForm.get('password').dirty">
+                  <i ion-text item-left text-left>El password es requerido.</i>
+                </div>
                 <button ion-button
                         [disabled]="!loginForm.valid"
                         (click)="login()" block outline color="light">Login
