@@ -4,20 +4,29 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header>
 
-  <ion-navbar>
-    <ion-title>asociarCompra</ion-title>
-  </ion-navbar>
-
-</ion-header>
-
+  <ion-header>
+    <ion-navbar color="primary">
+      <ion-buttons start></ion-buttons>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title>
+        Asociar compra
+      </ion-title>
+    </ion-navbar>
+  </ion-header>
 
 <ion-content padding>
-
-  <button ion-button (click)="scan()">Scan ...</button>
-  <pre *ngIf="loadedData">
+  <ion-card>
+    <ion-card-content>
+    <p>Presione Scan Now y escanee el código QR que aparecerá en la pantalla del cajero</p>
+    </ion-card-content>
+  </ion-card>
+<ion-card>
+  <button ion-button full (click)="scan()">[  ] Scan Now</button>
+    <pre *ngIf="loadedData">
     {{scanData | json}}
   </pre>
-
+</ion-card>
 </ion-content>

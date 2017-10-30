@@ -24,6 +24,7 @@ import {ListasGrupoPage} from "../pages/listas-grupo/listas-grupo";
 import {ClientesPage} from "../pages/clientes/clientes";
 import {MisComprasPage} from "../pages/mis-compras/mis-compras";
 import {BarcodeScanner} from "@ionic-native/barcode-scanner";
+import {AsociarCompraGruposPage} from "../pages/asociar-compra-grupos/asociar-compra-grupos";
 import {AsociarCompraPage} from "../pages/asociar-compra/asociar-compra";
 import {IonicStorageModule} from "@ionic/storage";
 import {ApiService} from "../services/api.service";
@@ -62,6 +63,7 @@ const cloudSettings: CloudSettings = {
     ConfiguracionPage,
     DetalleCompraPage,
     DetalleGrupoPage,
+    AsociarCompraGruposPage,
     AsociarCompraPage,
     DetalleListaPage,
     ClientesPage,
@@ -88,6 +90,7 @@ const cloudSettings: CloudSettings = {
     HomePage,
     ComprasPage,
     HomeTabsPage,
+    AsociarCompraGruposPage,
     AsociarCompraPage,
     HistorialComprasPage,
     LoginPage,
