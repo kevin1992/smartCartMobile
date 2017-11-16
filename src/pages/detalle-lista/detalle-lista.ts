@@ -20,10 +20,17 @@ export class DetalleListaPage {
   nombreDeLista:string;
   producto: string = "1";
   products=[
-    {name:'Coca Cola 2.25lt'},
-    {name:'Arroz 300gr'},
-    {name:'Leche 1lt'},
-    {name:'Milanesas 1kg'},
+    {name:'Coca Cola 2.25lt',precio:38},
+    {name:'Arroz 300gr',precio:15},
+    {name:'Leche 1lt', precio:14},
+    {name:'Milanesas 1kg',precio:70},
+    {name:'Pack Oreos',precio:53},
+    {name:'Esponja',precio:10},
+    {name:'Detergente 250ml',precio:42},
+    {name:'Salsa 300ml',precio:18},
+    {name:'Fideos Tallarin 300g',precio:16},
+    {name:'Pan Lactal 500g',precio:65},
+    {name:'Cafe 500g',precio:58},
   ]
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, public actionSheetCtrl:ActionSheetController) {
@@ -68,6 +75,10 @@ export class DetalleListaPage {
       ]
     });
     prompt.present();
+  }
+
+  getTotal(){
+    return this.products.map((p)=>{return p.precio}).reduce((a, b) => a + b, 0);
   }
   /*  showDelete(member) {
       let actionSheet = this.actionSheetCtrl.create({
