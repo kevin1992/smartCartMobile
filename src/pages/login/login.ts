@@ -4,6 +4,8 @@ import {HomeTabsPage} from "../home-tabs/home-tabs";
 import {ApiService} from "../../services/api.service";
 import {API} from "../../app/app.component";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {Facebook, FacebookLoginResponse} from '@ionic-native/facebook';
+import { GooglePlus } from '@ionic-native/google-plus';
 
 /**
  * Generated class for the LoginPage page.
@@ -25,7 +27,7 @@ export class LoginPage {
   private registerForm: FormGroup;
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public api: ApiService, public toastCtrl: ToastController, public loadingCtrl: LoadingController, private formBuilder: FormBuilder) {
+  constructor(private googlePlus: GooglePlus,private fb: Facebook,public navCtrl: NavController, public navParams: NavParams, public api: ApiService, public toastCtrl: ToastController, public loadingCtrl: LoadingController, private formBuilder: FormBuilder) {
 
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
@@ -76,10 +78,36 @@ export class LoginPage {
     });
   }
 
+
+  fblogin() {
+    this.fb.login(['public_profile', 'user_friends', 'email'])
+      .then((res: FacebookLoginResponse) => {
+          this.api.post(API.URL+"facebookLogin",{token:res.authResponse.accessToken})
+      } )
+      .catch(e => console.log('Error logging into Facebook', e));
+  }
+
+  googlelogin() {
+    this.fb.login(['public_profile', 'user_friends', 'email'])
+      .then((res: FacebookLoginResponse) => {
+        this.api.post(API.URL+"facebookLogin",{token:res.authResponse.accessToken})
+      } )
+      .catch(e => console.log('Error logging into Facebook', e));
+
+
+    this.googlePlus.login({})
+      .then((res) => {
+        this.api.post(API.URL+"googleLogin",{token:res.accessToken})
+      })
+      .catch(err => console.error(err));
+  }
+
   register() {
 
     this.api.post(API.URL + "register", {
-      name: this.registerForm.get('name').value, last_name: this.registerForm.get('last_name').value, "email": this.registerForm.get('email').value,
+      name: this.registerForm.get('name').value,
+      last_name: this.registerForm.get('last_name').value,
+      "email": this.registerForm.get('email').value,
       "password": this.registerForm.get('password').value
     }, {
       successMsg: "El usuario fue creado correctamente"

@@ -17,13 +17,12 @@ import {DetalleListaPage} from "../detalle-lista/detalle-lista";
 export class ProductosPage {
 
   newProducts = [];
-  nombreNuevoProducto:string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.initializeItems();
+    this.initializeNewProducts();
   }
 
-  initializeItems(){
+  initializeNewProducts(){
     this.newProducts=[
       {name:'Agua Mineral 2lts'},
       {name:'Arvejas 500gr'},
@@ -38,7 +37,7 @@ export class ProductosPage {
 
   getItems(product: any) {
     // Reset items back to all of the items
-    this.initializeItems();
+    this.initializeNewProducts();
 
     // set val to the value of the searchbar
     var val = product.target.value;

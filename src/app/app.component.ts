@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import {Platform} from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { LoginPage } from '../pages/login/login';
@@ -8,17 +8,20 @@ import {
   PushToken
 } from '@ionic/cloud-angular';
 import {ComprasPage} from "../pages/compras/compras";
-import {AsociarCompraPage} from "../pages/asociar-compra/asociar-compra";
+import {AsociarCompraGruposPage} from "../pages/asociar-compra-grupos/asociar-compra-grupos";
+import {GruposPage} from "../pages/grupos/grupos";
 
 @Component({
   templateUrl: 'app.html'
 })
 
 export class MyApp {
+  @ViewChild('mycontent') nav: Nav;
   public rootPage: any;
   public login = LoginPage;
   public compra = ComprasPage;
-  public asociarCompra = AsociarCompraPage;
+  public grupos = GruposPage;
+  public asociarCompraGrupos = AsociarCompraGruposPage;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,private push: Push) {
     this.rootPage= this.login; // Aca agrego la pagina principal
@@ -52,6 +55,10 @@ export class MyApp {
     window.localStorage.removeItem('smartCart-auth');
     this.openPage(this.login);
     window.location.reload();
+  }
+
+  goToPage(page){
+    this.nav.setRoot(page);
   }
 }
 

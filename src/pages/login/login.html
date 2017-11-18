@@ -1,4 +1,4 @@
-<ion-header>
+<!--<ion-header>
   <ion-navbar color="primary">
     <ion-buttons start></ion-buttons>
     <button ion-button menuToggle>
@@ -9,7 +9,7 @@
     </ion-title>
   </ion-navbar>
 </ion-header>
-
+-->
 <ion-content class="background">
   <ion-grid>
     <ion-row align-items-center>
@@ -42,11 +42,11 @@
                 </button>
                 <p>Ó</p>
                 <button ion-button block color="facebook">
-                  <ion-icon name="logo-facebook"></ion-icon>
+                  <ion-icon (click)="fblogin()" name="logo-facebook"></ion-icon>
                   Login con facebook
                 </button>
                 <button ion-button block color="googleplus">
-                  <ion-icon name="logo-googleplus"></ion-icon>
+                  <ion-icon (click)="googlelogin()"  name="logo-googleplus"></ion-icon>
                   Login con google+
                 </button>
               </ion-list>

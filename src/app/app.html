@@ -2,11 +2,11 @@
 <ion-menu [content]="mycontent">
   <ion-content>
     <ion-list>
+      <button ion-item menuClose (click)="goToPage(asociarCompraGrupos)">
+        Asociar Compra
+      </button>
       <button ion-item menuClose (click)="cerrarSesion()">
         Cerrar sesion
-      </button>
-      <button ion-item menuClose (click)="openPage(asociarCompra)">
-        Asociar Compra
       </button>
     </ion-list>
   </ion-content>

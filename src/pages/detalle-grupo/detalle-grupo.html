@@ -15,7 +15,12 @@
 <ion-content>
   <ion-card>
     <ion-card-header>
+      <ion-item>
       {{grupo.nombre || grupo.name }} ({{grupo.members.length}} integrantes)
+      <button ion-button outline item-end icon-right (click)="editNameGroup()">
+        <ion-icon name="create"></ion-icon>
+      </button>
+      </ion-item>
     </ion-card-header>
 
     <ion-card-content>

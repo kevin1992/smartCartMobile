@@ -94,4 +94,34 @@ export class DetalleGrupoPage {
   }
 
 
+  editNameGroup(){
+    let prompt = this.alertCtrl.create({
+      title: 'Renombrar Grupo',
+      message: "Ingrese nuevo nombre del grupo",
+      inputs: [
+        {
+          name: 'name',
+          placeholder: 'Nuevo nombre del Grupo'
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancelar',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Crear',
+          handler: data => {
+            //1) Update del nombre de grupo
+            //2) Refrescar pantalla Detalle Grupo
+            console.log('Saved clicked');
+            this.grupo.nombre = data.name;
+          }
+        }
+      ]
+    });
+    prompt.present();
+  }
 }
