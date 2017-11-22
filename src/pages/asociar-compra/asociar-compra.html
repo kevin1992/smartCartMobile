@@ -20,13 +20,10 @@
 <ion-content padding>
   <ion-card>
     <ion-card-content>
-    <p>Presione Scan Now y escanee el código QR que aparecerá en la pantalla del cajero</p>
+    <p>Presione Escanear y escanee el código QR que aparecerá en la pantalla del cajero</p>
     </ion-card-content>
   </ion-card>
 <ion-card>
-  <button ion-button full (click)="scan()">[  ] Scan Now</button>
-    <pre *ngIf="loadedData">
-    {{scanData | json}}
-  </pre>
+  <button ion-button full (click)="scan()">[  ] Escanear</button>
 </ion-card>
 </ion-content>

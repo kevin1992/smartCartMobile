@@ -1,6 +1,14 @@
 <ion-header>
   <ion-navbar color="primary">
-    <ion-title>Detalle {{nombreDeLista}}</ion-title>
+    <ion-title>Detalle de la lista {{lista.name}}</ion-title>
+    <ion-buttons end>
+      <button ion-button *ngIf="!isNew" (click)="update()" >
+        Guardar
+      </button>
+      <button ion-button *ngIf="isNew" (click)="save()" >
+        Guardar
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
@@ -8,7 +16,7 @@
   <ion-card>
     <ion-card-header>
       <ion-item>
-      {{nombreDeLista}} ({{products.length}} productos)
+      {{lista.name}} ({{lista.products.length}} productos)
       <button ion-button outline item-end icon-right (click)="editNameList()">
         <ion-icon name="create"></ion-icon>
       </button>
@@ -25,20 +33,37 @@
           <ion-list>
             <ion-spinner *ngIf="loading"></ion-spinner>
 
-            <!--CORREGIR, los valores deberian setearse para cada product-->
-            <button ion-item *ngFor="let product of products">
-              <ion-label>{{ product.name }}</ion-label>
-              <ion-select [(ngModel)]="producto" interface="popover">
-                <ion-option value="1">1</ion-option>
-                <ion-option value="2">2</ion-option>
-                <ion-option value="3">3</ion-option>
-                <ion-option value="4">4</ion-option>
-                <ion-option value="5">5</ion-option>
-                <ion-option value="6">6</ion-option>
-                <ion-option value="7">7</ion-option>
+            <ion-item-sliding *ngFor="let product of lista.products">
+              <!--CORREGIR, los valores deberian setearse para cada product-->
+              <button ion-item >
+                <p item-left >{{ product.name }} x</p>
+                <p item-right >{{ product.price * product.count |currency:"USD":true }}</p>
+                <ion-select [(ngModel)]="product.count" interface="popover">
+                  <ion-option value="1">1</ion-option>
+                  <ion-option value="2">2</ion-option>
+                  <ion-option value="3">3</ion-option>
+                  <ion-option value="4">4</ion-option>
+                  <ion-option value="5">5</ion-option>
+                  <ion-option value="6">6</ion-option>
+                  <ion-option value="7">7</ion-option>
                 </ion-select>
-            </button>
+              </button>
+              <ion-item-options side="right">
+                <button ion-button (click)="deleteItem(product)">Eliminar</button>
+              </ion-item-options>
+            </ion-item-sliding>
+
+
           </ion-list>
         </ion-card>
       </ion-content>
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-item>
+      <p item-left>Total</p>
+      <p item-right>{{getTotal()|currency:"USD":true}}</p>
+    </ion-item>
+  </ion-toolbar>
+</ion-footer>

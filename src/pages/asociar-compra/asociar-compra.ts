@@ -1,6 +1,10 @@
 import {Component} from '@angular/core';
 import {IonicPage, NavController, NavParams} from 'ionic-angular';
 import {BarcodeScanner, BarcodeScannerOptions} from "@ionic-native/barcode-scanner";
+import {ApiService} from "../../services/api.service";
+import {API} from "../../app/app.component";
+
+import {HomeTabsPage} from "../home-tabs/home-tabs";
 
 /**
  * Generated class for the AsociarCompraPage page.
@@ -20,9 +24,14 @@ export class AsociarCompraPage {
   encodeData: string;
   encodedData: {};
   scanData: {};
+  grupo;
   loadedData=false;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private barcodeScanner: BarcodeScanner) {
+  constructor(public navCtrl: NavController,public apiService:ApiService, public navParams: NavParams, private barcodeScanner: BarcodeScanner) {
+
+    console.log(this.navParams.get('grupo'));
+    this.grupo = this.navParams.get('group');
+
   }
 
   ionViewDidLoad() {
@@ -37,9 +46,12 @@ export class AsociarCompraPage {
 
       //text contiene lo que leyo, cancelled contiene si cancelo
       console.log(barcodeData);
-      this.scanData = barcodeData;
+      this.scanData = barcodeData.text;
+      this.apiService.post(API.URL + "groups/"+this.grupo.id+"/purchases/"+this.scanData+"/associate",{}, {successMsg:'La compra fue asociada correctamente!'}).subscribe((_)=>{
+        this.loadedData = true;
+        this.navCtrl.setRoot(HomeTabsPage);
+      });
 
-      this.loadedData = true;
     }, (err) => {
       console.log("Error occured : " + err);
     });

@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import {IonicPage, NavController, NavParams, ActionSheetController} from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 import {ProductosPage} from "../productos/productos";
+import {ApiService} from "../../services/api.service";
+import * as _ from 'lodash';
+import {API} from "../../app/app.component";
 
 /**
  * Generated class for the DetalleListaPage page.
@@ -17,19 +20,17 @@ import {ProductosPage} from "../productos/productos";
 })
 export class DetalleListaPage {
 
-  nombreDeLista:string;
-  producto: string = "1";
-  products=[
-    {name:'Coca Cola 2.25lt'},
-    {name:'Arroz 300gr'},
-    {name:'Leche 1lt'},
-    {name:'Milanesas 1kg'},
-  ]
+  lista;
+  isNew;
+  groupId;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, public actionSheetCtrl:ActionSheetController) {
+  constructor(public navCtrl: NavController,public apiService:ApiService, public navParams: NavParams, public alertCtrl: AlertController, public actionSheetCtrl:ActionSheetController) {
 
-    console.log(this.navParams.get('nombreLista'));
-    this.nombreDeLista = this.navParams.get('nombreLista');
+    this.lista = this.navParams.get('lista');
+    this.isNew = this.navParams.get('new');
+    this.groupId = this.navParams.get('groupId');
+
+    console.log(this.navParams.get('lista'));
   }
 
     ionViewDidLoad() {
@@ -37,7 +38,15 @@ export class DetalleListaPage {
     }
 
     searchNewProduct() {
-      this.navCtrl.push(ProductosPage);
+      this.navCtrl.push(ProductosPage,{lista:this.lista});
+  }
+
+  deleteItem(item){
+
+    _.remove(this.lista.products,(p)=>{
+      return p.id === item.id;
+    })
+
   }
 
   editNameList(){
@@ -58,16 +67,36 @@ export class DetalleListaPage {
           }
         },
         {
-          text: 'Crear',
+          text: 'OK',
           handler: data => {
             //1) Update del nombre de lista
             //2) Refrescar pantalla Detalle Lista
-            console.log('Saved clicked');
+            this.lista.name = data.name;
           }
         }
       ]
     });
     prompt.present();
+  }
+
+  save(){
+    let saveObj = _.cloneDeep({name:this.lista.name,products:this.lista.products.map((m)=>{return {id:m.id,count:m.count}})});
+
+    this.apiService.post(API.URL+"groups/"+this.groupId+"/lists",saveObj,{successMsg:'La lista fue creada satisfactoriamente!'}).subscribe((data)=>{
+      this.navCtrl.pop();
+    });
+  }
+
+  update(){
+    let saveObj = _.cloneDeep({name:this.lista.name,products:this.lista.products.map((m)=>{return {id:m.id,count:m.count}})});
+
+    this.apiService.put(API.URL+"groups/"+this.groupId+"/lists/"+this.lista.id,saveObj,{successMsg:'La lista fue modificada satisfactoriamente!'}).subscribe((data)=>{
+      this.navCtrl.pop();
+    });
+  }
+
+  getTotal(){
+    return this.lista.products.map((p)=>{return p.price*p.count}).reduce((a, b) => a + b, 0);
   }
   /*  showDelete(member) {
       let actionSheet = this.actionSheetCtrl.create({

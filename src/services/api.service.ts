@@ -88,10 +88,15 @@ export class ApiService {
     }).catch((err) => {
 
 
-      let errorBody = JSON.parse(err._body);
-
       loader.dismiss().then((_) => {
       });
+      let errorBody:any = {};
+      try{
+       errorBody = JSON.parse(err._body);
+      }catch(e){
+
+      }
+
 
       if (err.status == 401) {
         let toast = this.toastCtrl.create({

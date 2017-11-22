@@ -43,6 +43,14 @@ export class GruposPage {
     });
   }
 
+  delete(item){
+    this.apiService.delete(API.URL+"groups/"+item.id,{},{successMsg:'El grupo fue eliminado satisfactoriamente!'}).subscribe((data)=>{
+    });
+    setTimeout(()=>{
+    this.ionViewWillEnter();
+    },1000);
+  }
+
   itemSelected(grupo) {
     this.navCtrl.push(DetalleGrupoPage, {grupo: grupo});
   }

@@ -55,70 +55,12 @@
 <ion-content class="list-avatar-page">
 <ion-list>
 
-  <ion-item (click)="verProducto()">
-    <ion-avatar item-start>
-      <img src="assets/icon/CocaCola.JPG">
-    </ion-avatar>
-    <h2>Coca-Cola</h2>
-    <p>2,25L x 2 ($52,50 x u)</p>
-    <p item-end>$ 105,00</p>
+  <ion-item *ngFor="let product of compra.products" (click)="verProducto(product)">
+    <h2>{{product.name}}</h2>
+    <p>x{{product.count}} - {{product.price | currency:'USD':true}} cu</p>
+    <p item-end>{{product.price * product.count | currency:'USD':true}}</p>
   </ion-item>
 
-  <ion-item>
-    <ion-avatar item-start>
-      <img src="assets/icon/Aceite.JPG">
-    </ion-avatar>
-    <h2>Aceite De Girasol Cocinero</h2>
-    <p>900ml x 1 ($33,80 x u)</p>
-    <p item-end>$ 33,80</p>
-  </ion-item>
-
-
-
-  <ion-item>
-    <ion-avatar item-start>
-      <img src="assets/icon/CremaDental.JPG">
-    </ion-avatar>
-    <h2>Crema Dental Sensodyne Original</h2>
-    <p>90gr x 1 ($62,50 x u)</p>
-    <p item-end>$ 62,50</p>
-  </ion-item>
-
-  <ion-item>
-    <ion-avatar item-start>
-      <img src="assets/icon/JabonRopa.JPG">
-    </ion-avatar>
-    <h2>Skip Jabón Para Ropa Baja Espuma</h2>
-    <p>1,5Kg x 1 ($121,80 x u)</p>
-    <p item-end>$ 121,80</p>
-  </ion-item>
-
-  <ion-item>
-    <ion-avatar item-start>
-      <img src="assets/icon/SalsaGolf.JPG">
-    </ion-avatar>
-    <h2>Aderezo Salsa Golf Natura</h2>
-    <p>250gr x 1 ($21,30 x u)</p>
-    <p item-end>$ 21,30</p>
-  </ion-item>
-
-  <ion-item>
-    <ion-avatar item-start>
-      <img src="assets/icon/Arroz.JPG">
-    </ion-avatar>
-    <h2>Arroz 53 Grano Largo Fino</h2>
-    <p>1Kg x 4 ($14,20 x u)</p>
-    <p item-end>$ 56,80</p>
-  </ion-item>
-
-  <ion-item>
-    <ion-avatar item-start>
-      <img src="assets/icon/Cafe.JPG">
-    </ion-avatar>
-    <h2>Café La Virginia Molido</h2>
-    <p>250gr x 1 ($43,80 x u)</p>
-    <p item-right>$ 43,80</p>
-  </ion-item>
 
 </ion-list>
 </ion-content>
@@ -130,7 +72,7 @@
         <h4 item-left>TOTAL</h4>
       </ion-col>
       <ion-col col-9 text-right>
-        <h4>$ 784,10</h4>
+        <h4>{{getTotal() | currency:'USD':true}}</h4>
       </ion-col>
     </ion-row>
   </ion-toolbar>

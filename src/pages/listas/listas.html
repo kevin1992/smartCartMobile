@@ -6,31 +6,36 @@
 -->
 <ion-header>
   <ion-navbar color="primary">
-    <ion-buttons start>
-
-    </ion-buttons>
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
+
     <ion-title>
-      Listas de {{nombreDelGrupo}}
+      Listas de {{grupo.name}}
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
   <ion-card>
-    <ion-list >
+    <ion-list>
       <ion-spinner *ngIf="loading"></ion-spinner>
-      <button  ion-item *ngFor="let lista of listas" (click)="itemSelected(lista)">
-        {{ lista.name }}
-      </button>
+      <ion-item-sliding *ngFor="let lista of listas">
+        <button ion-item  (click)="itemSelected(lista)">
+          {{ lista.name }}
+        </button>
+        <ion-item-options side="right">
+          <button ion-button (click)="delete(lista)">Eliminar</button>
+        </ion-item-options>
+      </ion-item-sliding>
     </ion-list>
   </ion-card>
 
   <ion-fab right bottom>
 
-    <button ion-fab color="primary" (click)="doPromptNewList()"><ion-icon name="add"></ion-icon></button>
+    <button ion-fab color="primary" (click)="doPromptNewList()">
+      <ion-icon name="add"></ion-icon>
+    </button>
   </ion-fab>
 
 </ion-content>

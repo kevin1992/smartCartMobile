@@ -17,9 +17,8 @@
 </ion-header>
 
 <ion-content>
-  <ion-searchbar placeholder="Buscar grupo" (ionInput)="getGroupsQR($event)"></ion-searchbar>
   <ion-list>
-    <button ion-item *ngFor="let groupQR of groupsQR" (click)="groupQRSelected()">
+    <button ion-item *ngFor="let groupQR of groupsQR" (click)="groupQRSelected(groupQR)">
       {{ groupQR.name }}
     </button>
   </ion-list>

@@ -32,6 +32,7 @@ export class ClientesPage {
   initializeItems() {
     this.newMembers = [];
     this.apiService.get(API.URL + "search/clients?name=" + this.searchName + "&last_name=" + this.searchName, {}, {noLoading: true}).subscribe((data) => {
+
       this.newMembers = data;
     })
   }

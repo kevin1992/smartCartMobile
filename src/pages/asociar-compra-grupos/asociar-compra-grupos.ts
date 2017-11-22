@@ -1,6 +1,9 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {Component} from '@angular/core';
+import {IonicPage, NavController, NavParams} from 'ionic-angular';
 import {AsociarCompraPage} from "../asociar-compra/asociar-compra";
+import {API} from "../../app/app.component";
+import * as _ from 'lodash';
+import {ApiService} from "../../services/api.service";
 
 /**
  * Generated class for the AsociarCompraGruposPage page.
@@ -18,37 +21,25 @@ export class AsociarCompraGruposPage {
 
   groupsQR = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.initializeGroupsQR();
+  constructor(public navCtrl: NavController, public navParams: NavParams,public apiService:ApiService) {
+    this.getGroupsQR()
   }
 
-  initializeGroupsQR(){
-    this.groupsQR=[
-      {name:'Amigos'},
-      {name:'Amigos Futbol'},
-      {name:'Proyecto Final'},
-      {name:'Trabajo'},
-    ]
+  getGroupsQR() {
+
+    this.apiService.get(API.URL + "groups", {}, {}).subscribe((grupos) => {
+      grupos.forEach((grupo) => {
+        grupo.members = _.cloneDeep(grupo.clients);
+      });
+      this.groupsQR = grupos;
+    });
+
+
   }
 
-  getGroupsQR(product: any) {
-    // Reset items back to all of the items
-    this.initializeGroupsQR();
-
-    // set val to the value of the searchbar
-    var val = product.target.value;
-
-    // if the value is an empty string don't filter the items
-    if (val && val.trim() != '') {
-      this.groupsQR = this.groupsQR.filter((groupQR) => {
-        return (groupQR.name.toLowerCase().indexOf(val.toLowerCase()) > -1);
-      })
-    }
-  }
-
-  groupQRSelected(){
+  groupQRSelected(group) {
     // Asociar el codigo QR que se escaneará con el grupo seleccionado
-    this.navCtrl.push(AsociarCompraPage);
+    this.navCtrl.push(AsociarCompraPage,{group:group});
   }
 
   ionViewDidLoad() {

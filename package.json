@@ -31,6 +31,7 @@
         "@ionic/cloud-angular": "^0.12.0",
         "@ionic/storage": "2.0.1",
         "cordova-android": "^6.2.3",
+        "cordova-android-support-gradle-release": "^1.1.5",
         "cordova-plugin-compat": "^1.0.0",
         "cordova-plugin-console": "^1.0.5",
         "cordova-plugin-device": "^1.1.4",
@@ -68,10 +69,13 @@
             "phonegap-plugin-barcodescanner": {},
             "cordova-plugin-facebook4": {
                 "APP_ID": "171873930035831",
-                "APP_NAME": "com.dogmasolutions.smartcart"
+                "APP_NAME": "smartCart"
+            },
+            "cordova-android-support-gradle-release": {
+                "ANDROID_SUPPORT_VERSION": "25.+"
             },
             "cordova-plugin-googleplus": {
-                "REVERSED_CLIENT_ID": "639485402393-ccjeoiukg0k2ilhvlb9ogr3rbv8tqqfg.apps.googleusercontent.com"
+                "REVERSED_CLIENT_ID": "com.googleusercontent.apps.639485402393-ccjeoiukg0k2ilhvlb9ogr3rbv8tqqfg"
             }
         },
         "platforms": [

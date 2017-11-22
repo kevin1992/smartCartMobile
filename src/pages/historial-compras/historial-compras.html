@@ -10,36 +10,17 @@
       Historial de compras
     </ion-title>
   </ion-navbar>
-  <ion-toolbar color="primary">
-    <ion-searchbar>
-    </ion-searchbar>
-  </ion-toolbar>
+
 </ion-header>
 
 
 <ion-content>
 
   <ion-list>
-  <button (click)="verCompra()" ion-item>
-    08/08/2017 - Asado Amigos
-    <ion-icon name="search" item-end></ion-icon>
-  </button>
-  <button ion-item>
-    13/08/2017 - Compra Familiar Semanal
-    <ion-icon name="search" item-end></ion-icon>
-  </button>
-  <button ion-item>
-    20/08/2017 - Equipo Trabajo
-    <ion-icon name="search" item-end></ion-icon>
-  </button>
-  <button ion-item>
-    24/08/2017 - Personal
-    <ion-icon name="search" item-end></ion-icon>
-  </button>
-  <button ion-item>
-    27/08/2017 - Compra Familiar Semanal
-    <ion-icon name="search" item-end></ion-icon>
-  </button>
-</ion-list>
+    <button *ngFor="let compra of getCompras()" (click)="verCompra(compra)" ion-item>
+      {{compra.created_at | date}}
+      <ion-icon name="search" item-end></ion-icon>
+    </button>
+  </ion-list>
 
 </ion-content>

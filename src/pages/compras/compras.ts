@@ -16,14 +16,23 @@ import {DetalleProductoPage} from "../detalle-producto/detalle-producto";
 })
 export class ComprasPage {
 
+  compra;
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+
+    this.compra = this.navParams.get('compra');
+
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ComprasPage');
   }
 
-  verProducto(){
-    this.navCtrl.push(DetalleProductoPage);
+  verProducto(p){
+    this.navCtrl.push(DetalleProductoPage,{product:p});
+  }
+
+  getTotal(){
+    return this.compra.products.map((p)=>{return p.price*p.count}).reduce((a, b) => a + b, 0);
   }
 }

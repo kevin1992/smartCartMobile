@@ -7,7 +7,7 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>
-      Coca Cola
+      {{product.name}}
     </ion-title>
   </ion-navbar>
 </ion-header>
@@ -15,19 +15,14 @@
 <ion-content>
 
   <ion-card>
-    <ion-row>
-      <ion-col text-center>
-        <img src="assets/img/coca-cola.jpg" style="max-width:250px;margin:auto;">
-      </ion-col>
-    </ion-row>
     <ion-card-content>
       <ion-card-title text-center>
-        Coca Cola ($50)
+        {{product.name}}
       </ion-card-title>
       <ion-list>
         <ion-item>
           <p item-left>Calorias</p>
-          <p item-right>135cal /200ml</p>
+          <p item-right>{{product.calories}}</p>
         </ion-item>
       </ion-list>
     </ion-card-content>

@@ -16,7 +16,7 @@
       <ion-col col-12 text-center>
         <ion-card>
           <ion-card-header *ngIf="option=='login'">
-            Iniciar sesión en SMARTCART
+            Iniciar sesión en <span (click)="setApiUrl()">SMARTCART</span>
           </ion-card-header>
           <ion-card-header *ngIf="option=='register'">
             Registrate en SMARTCART
@@ -41,12 +41,12 @@
                         (click)="login()" block outline color="light">Login
                 </button>
                 <p>Ó</p>
-                <button ion-button block color="facebook">
-                  <ion-icon (click)="fblogin()" name="logo-facebook"></ion-icon>
+                <button (click)="fblogin()" ion-button block color="facebook">
+                  <ion-icon  name="logo-facebook"></ion-icon>
                   Login con facebook
                 </button>
-                <button ion-button block color="googleplus">
-                  <ion-icon (click)="googlelogin()"  name="logo-googleplus"></ion-icon>
+                <button (click)="googlelogin()" ion-button block color="googleplus">
+                  <ion-icon   name="logo-googleplus"></ion-icon>
                   Login con google+
                 </button>
               </ion-list>

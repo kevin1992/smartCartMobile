@@ -6,6 +6,7 @@ import {ClientesPage} from "../clientes/clientes";
 import * as _ from 'lodash';
 import {ApiService} from "../../services/api.service";
 import {API} from "../../app/app.component";
+import {HistorialComprasPage} from "../historial-compras/historial-compras";
 
 /**
  * Generated class for the DetalleGrupoPage page.
@@ -25,7 +26,7 @@ export class DetalleGrupoPage {
   isNew: boolean;
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,public toastCtrl: ToastController, public alertCtrl: AlertController, public actionSheetCtrl: ActionSheetController,public apiService:ApiService) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public toastCtrl: ToastController, public alertCtrl: AlertController, public actionSheetCtrl: ActionSheetController, public apiService: ApiService) {
 
     console.log(this.navParams.get('grupo'));
     this.grupo = this.navParams.get('grupo');
@@ -69,18 +70,30 @@ export class DetalleGrupoPage {
     this.navCtrl.push(ListasPage, {grupo: this.grupo});
   }
 
-  save(){
-    let saveObj = _.cloneDeep({name:this.grupo.nombre,members:this.grupo.members.map((m)=>{return m.id;})});
+  save() {
+    let saveObj = _.cloneDeep({
+      name: this.grupo.nombre, members: this.grupo.members.map((m) => {
+        return m.id;
+      })
+    });
 
-    this.apiService.post(API.URL+"groups",saveObj,{successMsg:'El grupo fue creado satisfactoriamente!'}).subscribe((data)=>{
+    this.apiService.post(API.URL + "groups", saveObj, {successMsg: 'El grupo fue creado satisfactoriamente!'}).subscribe((data) => {
       this.navCtrl.pop();
     });
   }
 
-  update(){
-    let saveObj = _.cloneDeep({id:this.grupo.id,name:this.grupo.name,members:this.grupo.members.map((m)=>{return m.id;})});
+  groupPurchases() {
+    this.navCtrl.push(HistorialComprasPage, {grupo: this.grupo});
+  }
 
-    this.apiService.put(API.URL+"groups/"+this.grupo.id,saveObj,{successMsg:'El grupo fue modificado satisfactoriamente!'}).subscribe((data)=>{
+  update() {
+    let saveObj = _.cloneDeep({
+      id: this.grupo.id, name: this.grupo.name, members: this.grupo.members.map((m) => {
+        return m.id;
+      })
+    });
+
+    this.apiService.put(API.URL + "groups/" + this.grupo.id, saveObj, {successMsg: 'El grupo fue modificado satisfactoriamente!'}).subscribe((data) => {
       this.navCtrl.pop();
     });
   }
@@ -94,7 +107,7 @@ export class DetalleGrupoPage {
   }
 
 
-  editNameGroup(){
+  editNameGroup() {
     let prompt = this.alertCtrl.create({
       title: 'Renombrar Grupo',
       message: "Ingrese nuevo nombre del grupo",

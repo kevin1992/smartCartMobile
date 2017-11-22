@@ -2,10 +2,10 @@ import {Component} from '@angular/core';
 import {IonicPage, NavController, NavParams, ToastController, LoadingController} from 'ionic-angular';
 import {HomeTabsPage} from "../home-tabs/home-tabs";
 import {ApiService} from "../../services/api.service";
-import {API} from "../../app/app.component";
+import {API, DEVICE_TOKEN} from "../../app/app.component";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Facebook, FacebookLoginResponse} from '@ionic-native/facebook';
-import { GooglePlus } from '@ionic-native/google-plus';
+import {GooglePlus} from '@ionic-native/google-plus';
 
 /**
  * Generated class for the LoginPage page.
@@ -27,7 +27,7 @@ export class LoginPage {
   private registerForm: FormGroup;
 
 
-  constructor(private googlePlus: GooglePlus,private fb: Facebook,public navCtrl: NavController, public navParams: NavParams, public api: ApiService, public toastCtrl: ToastController, public loadingCtrl: LoadingController, private formBuilder: FormBuilder) {
+  constructor(private googlePlus: GooglePlus, private fb: Facebook, public navCtrl: NavController,public apiService:ApiService, public navParams: NavParams, public api: ApiService, public toastCtrl: ToastController, public loadingCtrl: LoadingController, private formBuilder: FormBuilder) {
 
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
@@ -72,7 +72,12 @@ export class LoginPage {
       password: this.loginForm.controls['password'].value
     }, {}).subscribe((data) => {
 
-      window.localStorage.setItem('smartCart-auth', data.token_type + ' ' + data.access_token)
+      window.localStorage.setItem('smartCart-auth', data.token_type + ' ' + data.access_token);
+
+      this.apiService.post(API.URL + "clients/deviceToken/", {device_token: DEVICE_TOKEN}, {}).subscribe(() => {
+
+      });
+
       this.goMain();
 
     });
@@ -82,23 +87,32 @@ export class LoginPage {
   fblogin() {
     this.fb.login(['public_profile', 'user_friends', 'email'])
       .then((res: FacebookLoginResponse) => {
-          this.api.post(API.URL+"facebookLogin",{token:res.authResponse.accessToken})
-      } )
+        return this.api.post(API.URL + "facebookLogin", {token: res.authResponse.accessToken},{}).subscribe((data)=>{
+          data.token_type = "Bearer";
+          window.localStorage.setItem('smartCart-auth', data.token_type + ' ' + data.accessToken)
+        });
+      }).then((data) => {
+
+      setTimeout(()=>{
+      this.goMain();
+      },1000);
+    })
       .catch(e => console.log('Error logging into Facebook', e));
   }
 
   googlelogin() {
-    this.fb.login(['public_profile', 'user_friends', 'email'])
-      .then((res: FacebookLoginResponse) => {
-        this.api.post(API.URL+"facebookLogin",{token:res.authResponse.accessToken})
-      } )
-      .catch(e => console.log('Error logging into Facebook', e));
-
-
     this.googlePlus.login({})
       .then((res) => {
-        this.api.post(API.URL+"googleLogin",{token:res.accessToken})
-      })
+        return this.api.post(API.URL + "googleLogin", {token: res.accessToken},{}).subscribe((data)=>{
+          data.token_type = "Bearer";
+          window.localStorage.setItem('smartCart-auth', data.token_type + ' ' + data.accessToken)
+        });
+      }).then((data) => {
+
+      setTimeout(()=>{
+        this.goMain();
+      },1000);
+    })
       .catch(err => console.error(err));
   }
 
@@ -132,6 +146,12 @@ export class LoginPage {
     this.registerForm.reset();
     this.loginForm.reset();
 
+  }
+
+
+  setApiUrl() {
+    API.URL = prompt('Api url:');
+    window.localStorage.setItem('smart-cart-api-url',API.URL);
   }
 
 }

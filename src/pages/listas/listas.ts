@@ -27,22 +27,36 @@ export class ListasPage {
     this.grupo = this.navParams.get('grupo');
   }
 
-  ionViewDidLoad() {
+  ionViewWillEnter() {
     console.log('ionViewDidLoad ListasPage');
     this.loading = true;
-    this.apiService.get(API.URL+"/lists",{},{mock:[
-      {id:1,name:'Lista semanal'},
-      {id:2,name:'Lista cumpleaños'},
-      {id:3,name:'Lista Cena'}
-    ]}).subscribe((listas)=>{
+    this.apiService.get(API.URL+"groups/"+this.grupo.id+"/lists",{},{}).subscribe((listas)=>{
+      listas.forEach((l)=>{
+        if(!l.products){
+          l.products = [];
+        }
+        l.products.forEach((p)=>{
+          p.count = p.pivot.count;
+          p.count = parseInt(p.count);
+          p.price = parseInt(p.price);
+        });
+
+      });
       this.listas = listas;
       this.loading = false;
     });
 
   }
 
+  delete(item){
+    this.apiService.delete(API.URL+"groups/"+this.grupo.id+"/lists/"+item.id,{},{successMsg:'La lista fue eliminada satisfactoriamente!'}).subscribe((data)=>{
+      this.navCtrl.pop();
+    });
+  }
+
+
   itemSelected(lista){
-    this.navCtrl.push(DetalleListaPage,{nombreLista:lista.name,id:lista.id});
+    this.navCtrl.push(DetalleListaPage,{lista:lista,groupId:this.grupo.id});
   }
 
   doPromptNewList() {
@@ -67,8 +81,10 @@ export class ListasPage {
           handler: data => {
             //Crear la page para ingresar al listado de listas
             //this.navCtrl.push(DetalleListaPage,{nombre:data.name});
-            this.listas.push({name:data.name});
-            console.log('Saved clicked');
+            //this.navCtrl.push(DetalleGrupoPage,{nombre:data.name});
+            if (data.name && data.name.length > 0) {
+              this.navCtrl.push(DetalleListaPage, {lista: {name: data.name, products: []},groupId:this.grupo.id, new: true});
+            }
           }
         }
       ]

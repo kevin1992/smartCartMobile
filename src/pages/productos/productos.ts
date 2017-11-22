@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {IonicPage, NavController, NavParams, ToastController} from 'ionic-angular';
 import {DetalleListaPage} from "../detalle-lista/detalle-lista";
+import {ApiService} from "../../services/api.service";
+import {API} from "../../app/app.component";
+import * as _ from 'lodash';
 
 /**
  * Generated class for the ProductosPage page.
@@ -17,22 +20,19 @@ import {DetalleListaPage} from "../detalle-lista/detalle-lista";
 export class ProductosPage {
 
   newProducts = [];
+  searchName = '';
+  lista;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public apiService:ApiService,public toastCtrl:ToastController, public navParams: NavParams) {
     this.initializeNewProducts();
+    this.lista = navParams.get('lista');
   }
 
   initializeNewProducts(){
-    this.newProducts=[
-      {name:'Agua Mineral 2lts'},
-      {name:'Arvejas 500gr'},
-      {name:'Detergente Ala 900ml'},
-      {name:'Detergente Cif 900ml'},
-      {name:'Lavandina 1lt'},
-      {name:'Queso 900gr'},
-      {name:'Salsa de Tomate 400gr'},
-      {name:'Yogurt 1lt'},
-    ]
+    this.newProducts=[];
+    this.apiService.get(API.URL + "search/products?name=" + this.searchName , {}, {noLoading: true}).subscribe((data) => {
+      this.newProducts = data;
+    })
   }
 
   getItems(product: any) {
@@ -50,9 +50,24 @@ export class ProductosPage {
     }
   }
 
-  newProductSelected(){
-    // hacer un INSERT a la lista de productos actual
-    this.navCtrl.pop(DetalleListaPage);
+  newProductSelected(producto){
+    // hacer un INSERT a la lista de miembros actual del grupo
+    let index = _.findIndex(this.lista.products, (m) => {
+      return m.id == producto.id;
+    });
+    if (index != -1) {
+      let toast = {
+        message: 'Ese producto ya fue agregado anteriormente!',
+        duration: 3000
+      };
+      let toastObj = this.toastCtrl.create(toast);
+      toastObj.present();
+    }
+    else {
+      producto.count = 1;
+      this.lista.products.push(producto);
+      this.navCtrl.pop();
+    }
   }
 
   ionViewDidLoad() {

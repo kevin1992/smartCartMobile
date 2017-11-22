@@ -1,8 +1,8 @@
-import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
-import { StatusBar } from '@ionic-native/status-bar';
-import { SplashScreen } from '@ionic-native/splash-screen';
-import { LoginPage } from '../pages/login/login';
+import {Component, ViewChild} from '@angular/core';
+import {Nav, Platform} from 'ionic-angular';
+import {StatusBar} from '@ionic-native/status-bar';
+import {SplashScreen} from '@ionic-native/splash-screen';
+import {LoginPage} from '../pages/login/login';
 import {
   Push,
   PushToken
@@ -10,6 +10,7 @@ import {
 import {ComprasPage} from "../pages/compras/compras";
 import {AsociarCompraGruposPage} from "../pages/asociar-compra-grupos/asociar-compra-grupos";
 import {GruposPage} from "../pages/grupos/grupos";
+import {ApiService} from "../services/api.service";
 
 @Component({
   templateUrl: 'app.html'
@@ -23,19 +24,52 @@ export class MyApp {
   public grupos = GruposPage;
   public asociarCompraGrupos = AsociarCompraGruposPage;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,private push: Push) {
-    this.rootPage= this.login; // Aca agrego la pagina principal
+  constructor(platform: Platform, statusBar: StatusBar, public apiService: ApiService, splashScreen: SplashScreen, private push: Push) {
+    this.rootPage = this.login; // Aca agrego la pagina principal
     platform.ready().then(() => {
-      if(platform.is('android')){
+
+      let api_url = window.localStorage.getItem('smart-cart-api-url');
+
+      if (api_url) {
+        API.URL = api_url;
+      }
+
+      if (platform.is('android')) {
         this.push.register().then((t: PushToken) => {
           return this.push.saveToken(t);
         }).then((t: PushToken) => {
           console.log('Token saved:', t.token);
-        });
+          DEVICE_TOKEN = t.token;
+
+          if (api_url) {
+            this.apiService.post(API.URL + "clients/deviceToken/", {device_token: DEVICE_TOKEN}, {}).subscribe(() => {
+
+              }
+            );
+          }
+
+        })
+        ;
 
         this.push.rx.notification()
           .subscribe((msg) => {
-            alert(msg.title + ': ' + msg.text);
+            let data: any = msg.payload;
+            alert(msg.text);
+            if (data.groupId) {
+              this.apiService.get(API.URL + 'groups/' + data.groupId + "/purchases/" + data.purchaseId, {}, {}).subscribe((compra) => {
+
+                if (!compra.products) {
+                  compra.products = [];
+                }
+                compra.products.forEach((p) => {
+                  p.count = p.pivot.count;
+                  p.count = parseInt(p.count);
+                  p.price = parseInt(p.price);
+                });
+
+                this.nav.setRoot(ComprasPage, {compra: compra});
+              });
+            }
           });
       }
 
@@ -47,21 +81,32 @@ export class MyApp {
 
   }
 
-  openPage(page){
+  openPage(page) {
     this.rootPage = page;
   }
 
-  cerrarSesion(){
+  cerrarSesion() {
     window.localStorage.removeItem('smartCart-auth');
     this.openPage(this.login);
     window.location.reload();
   }
 
-  goToPage(page){
+  goToPage(page) {
     this.nav.setRoot(page);
   }
 }
 
-export const API = {
-  URL:'/api/'
+
+export let API = {
+  URL: '/api/'
 };
+
+export let DEVICE_TOKEN = null;
+
+
+/*
+export const API = {
+  URL: 'http://24dcfe65.ngrok.io/api/'
+};
+*/
+
